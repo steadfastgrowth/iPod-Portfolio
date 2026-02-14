@@ -441,9 +441,9 @@ export default function App() {
             onTouchMove={e => { e.preventDefault(); const t = e.touches[0]; handleWheelMove(t.clientX, t.clientY); }}
             onTouchEnd={() => handleWheelEnd()}>
             <span style={{ position: "absolute", top: 14, fontSize: 9, fontWeight: 600, color: theme.wheelText, letterSpacing: 1.5 }}>MENU</span>
-            <span style={{ position: "absolute", bottom: 14, fontSize: 10, color: theme.wheelText }}>▶❚❚</span>
-            <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", fontSize: 10, color: theme.wheelText }}>◁◁</span>
-            <span style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 10, color: theme.wheelText }}>▷▷</span>
+            <span style={{ position: "absolute", bottom: 14, fontSize: 8, color: theme.wheelText, letterSpacing: 1 }}>▶︎❙❙</span>
+            <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText }}>◂◂</span>
+            <span style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText }}>▸▸</span>
             <div onClick={e => { e.stopPropagation(); handleSelect(); }}
               style={{ width: isMobile ? Math.min(66, ipodW * 0.22) : 74, height: isMobile ? Math.min(66, ipodW * 0.22) : 74, borderRadius: "50%", background: theme.wheelCenter, boxShadow: theme.wheelCenterShadow, zIndex: 2, cursor: "pointer", transition: "transform 0.1s" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(0.96)"}

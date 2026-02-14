@@ -385,14 +385,14 @@ export default function App() {
     const a = getAngle(x, y); let d = a - lastAngleRef.current;
     if (d > 180) d -= 360; if (d < -180) d += 360;
     accumulatorRef.current += d; lastAngleRef.current = a;
-    if (accumulatorRef.current > 28) { setSelectedIndex(p => Math.min(p + 1, MENU_ITEMS.length - 1)); accumulatorRef.current = 0; }
-    else if (accumulatorRef.current < -28) { setSelectedIndex(p => Math.max(p - 1, 0)); accumulatorRef.current = 0; }
+    if (accumulatorRef.current > 28) { setSelectedIndex(p => Math.min(p + 1, MENU_ITEMS.length - 1)); accumulatorRef.current = 0; try { navigator.vibrate(5); } catch(e) {} }
+    else if (accumulatorRef.current < -28) { setSelectedIndex(p => Math.max(p - 1, 0)); accumulatorRef.current = 0; try { navigator.vibrate(5); } catch(e) {} }
   }, [getAngle, openSection, zoomPhase]);
   const handleWheelEnd = useCallback(() => { isTrackingRef.current = false; lastAngleRef.current = null; }, []);
 
   useEffect(() => { const up = () => handleWheelEnd(); const mv = (e) => handleWheelMove(e.clientX, e.clientY); window.addEventListener("mouseup", up); window.addEventListener("mousemove", mv); return () => { window.removeEventListener("mouseup", up); window.removeEventListener("mousemove", mv); }; }, [handleWheelEnd, handleWheelMove]);
 
-  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 900); };
+  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); try { navigator.vibrate(15); } catch(e) {} setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 900); };
   const handleBack = () => { setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 700); };
 
   useEffect(() => {

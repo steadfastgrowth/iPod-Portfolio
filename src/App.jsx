@@ -339,7 +339,7 @@ function IPodScreen({ theme, selectedIndex }) {
   return (
     <div style={{ width: "100%", height: 180, background: theme.screenBg, borderRadius: 6, overflow: "hidden", boxShadow: "inset 0 1px 3px rgba(0,0,0,0.2)", border: `1.5px solid ${theme.screenBorder}`, display: "flex", flexDirection: "column", fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif" }}>
       <div style={{ background: theme.headerBg, padding: "3px 10px", display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: 10, fontWeight: 600, color: theme.headerText, flexShrink: 0, minHeight: 20 }}>
-        <span>iPod</span>
+        <span>PortfolioPod</span>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <span style={{ fontSize: 7 }}>▶</span>
           <div style={{ width: 20, height: 8, border: `1px solid ${theme.headerText}`, borderRadius: 2, display: "flex", alignItems: "center", padding: "0 1px", gap: 0.5 }}>

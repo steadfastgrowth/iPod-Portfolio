@@ -392,8 +392,8 @@ export default function App() {
 
   useEffect(() => { const up = () => handleWheelEnd(); const mv = (e) => handleWheelMove(e.clientX, e.clientY); window.addEventListener("mouseup", up); window.addEventListener("mousemove", mv); return () => { window.removeEventListener("mouseup", up); window.removeEventListener("mousemove", mv); }; }, [handleWheelEnd, handleWheelMove]);
 
-  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); try { navigator.vibrate(15); } catch(e) {} setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 750); };
-  const handleBack = () => { setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 550); };
+  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); try { navigator.vibrate(15); } catch(e) {} setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 400); };
+  const handleBack = () => { setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 350); };
 
   useEffect(() => {
     const h = (e) => {
@@ -412,11 +412,11 @@ export default function App() {
   const ipodW = isMobile ? Math.min(300, typeof window !== "undefined" ? window.innerWidth * 0.85 : 300) : 320;
 
   const ipodContainerStyle = (() => {
-    const base = { display: "flex", flexDirection: "column", alignItems: "center" };
-    if (zoomPhase === "idle") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "auto", transition: "all 0.55s cubic-bezier(0.22, 1, 0.36, 1)" };
-    if (zoomPhase === "zooming") return { ...base, transform: `scale(${isMobile ? 3.8 : 4.5}) translateY(-15%)`, pointerEvents: "none", transformOrigin: "50% 28%", transition: "transform 0.75s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.75s cubic-bezier(0.32, 0.72, 0, 1)" };
+    const base = { display: "flex", flexDirection: "column", alignItems: "center", transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)" };
+    if (zoomPhase === "idle") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "auto" };
+    if (zoomPhase === "zooming") return { ...base, transform: "scale(1.03)", opacity: 0, pointerEvents: "none" };
     if (zoomPhase === "open") return { ...base, opacity: 0, pointerEvents: "none", position: "absolute" };
-    if (zoomPhase === "closing") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "none", transition: "all 0.55s cubic-bezier(0.22, 1, 0.36, 1)" };
+    if (zoomPhase === "closing") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "none" };
     return base;
   })();
 
@@ -431,12 +431,12 @@ export default function App() {
       )}
 
       <div style={ipodContainerStyle}>
-        <div style={{ marginBottom: 24, textAlign: "center", transition: "opacity 0.3s ease", opacity: zoomPhase === "idle" || zoomPhase === "closing" ? 1 : 0 }}>
+        <div style={{ marginBottom: 24, textAlign: "center" }}>
           <div style={{ fontSize: isMobile ? 22 : 28, fontWeight: 700, letterSpacing: -0.5, color: mode === "light" ? "#1a1a1a" : "#e0e0e0" }}>John P. Ciannello</div>
         </div>
         <div style={{ width: ipodW, background: theme.ipodBody, borderRadius: 24, padding: isMobile ? "16px 14px" : "20px 18px", boxShadow: theme.ipodShadow, border: `1px solid ${theme.ipodBorder}`, display: "flex", flexDirection: "column", alignItems: "center", gap: isMobile ? 12 : 16 }}>
           <IPodScreen theme={theme} selectedIndex={selectedIndex} />
-          <div ref={wheelRef} style={{ width: isMobile ? Math.min(185, ipodW * 0.63) : 205, height: isMobile ? Math.min(185, ipodW * 0.63) : 205, borderRadius: "50%", background: theme.wheelBg, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", cursor: "pointer", boxShadow: theme.wheelShadow, userSelect: "none", WebkitUserSelect: "none", touchAction: "none", transition: "opacity 0.25s ease", opacity: zoomPhase === "idle" || zoomPhase === "closing" ? 1 : 0 }}
+          <div ref={wheelRef} style={{ width: isMobile ? Math.min(185, ipodW * 0.63) : 205, height: isMobile ? Math.min(185, ipodW * 0.63) : 205, borderRadius: "50%", background: theme.wheelBg, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", cursor: "pointer", boxShadow: theme.wheelShadow, userSelect: "none", WebkitUserSelect: "none", touchAction: "none" }}
             onMouseDown={e => handleWheelStart(e.clientX, e.clientY)}
             onTouchStart={e => { const t = e.touches[0]; handleWheelStart(t.clientX, t.clientY); }}
             onTouchMove={e => { e.preventDefault(); const t = e.touches[0]; handleWheelMove(t.clientX, t.clientY); }}
@@ -451,13 +451,13 @@ export default function App() {
               onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"} />
           </div>
         </div>
-        <div style={{ marginTop: 18, fontSize: 10, fontFamily: "monospace", color: mode === "light" ? "#888" : "#666", letterSpacing: 1.5, opacity: zoomPhase === "idle" ? 0.5 : 0, textAlign: "center", transition: "opacity 0.2s ease" }}>
+        <div style={{ marginTop: 18, fontSize: 10, fontFamily: "monospace", color: mode === "light" ? "#888" : "#666", letterSpacing: 1.5, opacity: 0.5, textAlign: "center" }}>
           {isMobile ? "DRAG THE WHEEL TO SCROLL · TAP CENTER TO SELECT" : "DRAG THE WHEEL TO SCROLL · CLICK CENTER TO SELECT · ↑↓ ENTER"}
         </div>
       </div>
 
       {openSection && zoomPhase === "open" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "auto", animation: "contentIn 0.3s ease forwards" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "auto", animation: "contentIn 0.25s ease forwards" }}>
           <PageWrapper theme={theme} title={sectionTitle} onBack={handleBack} onToggle={toggleMode} mode={mode} isMobile={isMobile}>
             {ContentComponent && <ContentComponent theme={theme} isMobile={isMobile} />}
           </PageWrapper>
@@ -465,7 +465,7 @@ export default function App() {
       )}
 
       {openSection && zoomPhase === "closing" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "hidden", animation: "contentOut 0.3s ease forwards", pointerEvents: "none" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "hidden", animation: "contentOut 0.2s ease forwards", pointerEvents: "none" }}>
           <PageWrapper theme={theme} title={sectionTitle} onBack={() => {}} onToggle={() => {}} mode={mode} isMobile={isMobile}>
             {ContentComponent && <ContentComponent theme={theme} isMobile={isMobile} />}
           </PageWrapper>

@@ -11,7 +11,7 @@ const MENU_ITEMS = [
 ];
 
 const PROJECTS = [
-  { name: "Steadfast Growth LLC", role: "Founder & Lead Sales Guy", description: "Revenue strategy and fractional AE services for businesses that need help generating revenue.", status: "Active" },
+  { name: "Steadfast Growth LLC", role: "Founder & Lead Sales Guy", description: "Revenue strategy and fractional AE services for businesses that need help generating revenue.", status: "Active", url: "https://steadfastgrowth.io" },
   { name: "Sales Rep Cards", role: "Founder", description: "A collectible trading card platform for sales professionals. Think Topps, but for closers.", status: "Coming Soon" },
   { name: "Vibe Coding", role: "Builder", description: "I build apps, tools, and automations by collaborating with AI. From Chrome extensions to full web apps — if I can dream it, I can ship it.", status: "Ongoing" },
 ];
@@ -143,8 +143,8 @@ function NowPlayingContent({ theme, isMobile }) {
         <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Founder @ Steadfast Growth · BDM @ Praxis Careers</div>
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
-        {[{ emoji: "📈", name: "Steadfast Growth", sub: "Founder & Lead Sales Guy" }, { emoji: "🤝", name: "Praxis Careers", sub: "Business Development Manager" }].map((item, i) => (
-          <GlassCard key={i} theme={theme} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
+        {[{ emoji: "📈", name: "Steadfast Growth", sub: "Founder & Lead Sales Guy", url: "https://steadfastgrowth.io" }, { emoji: "🤝", name: "Praxis Careers", sub: "Business Development Manager" }].map((item, i) => (
+          <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
             <div style={{ fontSize: 36, marginBottom: 10 }}>{item.emoji}</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: theme.pageText, marginBottom: 4 }}>{item.name}</div>
             <div style={{ fontSize: 12, color: theme.pageSecondary }}>{item.sub}</div>
@@ -221,9 +221,9 @@ function ProjectsContent({ theme, isMobile }) {
       <div style={{ fontSize: 14, color: theme.pageSecondary, marginBottom: 24 }}>Things I'm building.</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
         {PROJECTS.map((p, i) => (
-          <GlassCard key={i} theme={theme} style={{ padding: 22 }}>
+          <GlassCard key={i} theme={theme} href={p.url} style={{ padding: 22 }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
-              <div style={{ fontSize: 17, fontWeight: 700, color: theme.pageText }}>{p.name}</div>
+              <div style={{ fontSize: 17, fontWeight: 700, color: theme.pageText }}>{p.name} {p.url && <span style={{ fontSize: 11, color: theme.pageAccent }}>↗</span>}</div>
               <Tag theme={theme}>{p.status}</Tag>
             </div>
             <div style={{ fontSize: 12, color: theme.pageAccent, fontWeight: 600, marginBottom: 12, letterSpacing: 0.3 }}>{p.role}</div>
@@ -299,6 +299,7 @@ function ContactContent({ theme, isMobile }) {
       <div style={{ fontSize: 14, color: theme.pageSecondary, marginBottom: 24 }}>Let's connect.</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
+          { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },
           { icon: "📧", label: "Steadfast Growth", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
           { icon: "📧", label: "Praxis", value: "john@joinpraxis.com", href: "mailto:john@joinpraxis.com" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },
@@ -356,7 +357,7 @@ function IPodScreen({ theme, selectedIndex }) {
           ))}
         </div>
         <div style={{ width: "38%", background: theme.previewBg, borderLeft: `0.5px solid ${theme.menuDivider}`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-          <span style={{ fontSize: 36, transition: "all 0.15s ease" }}>{MENU_ITEMS[selectedIndex].preview}</span>
+          <span style={{ fontSize: 36, transition: "all 0.15s ease", fontFamily: "'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif" }}>{MENU_ITEMS[selectedIndex].preview}</span>
         </div>
       </div>
     </div>
@@ -391,8 +392,8 @@ export default function App() {
 
   useEffect(() => { const up = () => handleWheelEnd(); const mv = (e) => handleWheelMove(e.clientX, e.clientY); window.addEventListener("mouseup", up); window.addEventListener("mousemove", mv); return () => { window.removeEventListener("mouseup", up); window.removeEventListener("mousemove", mv); }; }, [handleWheelEnd, handleWheelMove]);
 
-  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 600); };
-  const handleBack = () => { setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 450); };
+  const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 900); };
+  const handleBack = () => { setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 700); };
 
   useEffect(() => {
     const h = (e) => {
@@ -411,11 +412,11 @@ export default function App() {
   const ipodW = isMobile ? Math.min(300, typeof window !== "undefined" ? window.innerWidth * 0.85 : 300) : 320;
 
   const ipodContainerStyle = (() => {
-    const base = { display: "flex", flexDirection: "column", alignItems: "center", transition: "all 0.6s cubic-bezier(0.16, 1, 0.3, 1)" };
+    const base = { display: "flex", flexDirection: "column", alignItems: "center", transition: "all 1s cubic-bezier(0.22, 1, 0.36, 1)" };
     if (zoomPhase === "idle") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "auto" };
     if (zoomPhase === "zooming") return { ...base, transform: `scale(${isMobile ? 4 : 5}) translateY(-12%)`, opacity: 0, pointerEvents: "none", transformOrigin: "50% 30%" };
     if (zoomPhase === "open") return { ...base, opacity: 0, pointerEvents: "none", position: "absolute" };
-    if (zoomPhase === "closing") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "none", transition: "all 0.45s cubic-bezier(0.16, 1, 0.3, 1)" };
+    if (zoomPhase === "closing") return { ...base, transform: "scale(1)", opacity: 1, pointerEvents: "none", transition: "all 0.7s cubic-bezier(0.22, 1, 0.36, 1)" };
     return base;
   })();
 
@@ -451,12 +452,12 @@ export default function App() {
           </div>
         </div>
         <div style={{ marginTop: 18, fontSize: 10, fontFamily: "monospace", color: mode === "light" ? "#888" : "#666", letterSpacing: 1.5, opacity: 0.5, textAlign: "center" }}>
-          {isMobile ? "SWIPE WHEEL · TAP CENTER" : "SCROLL WHEEL · CLICK CENTER · ↑↓ ENTER"}
+          {isMobile ? "DRAG THE WHEEL TO SCROLL · TAP CENTER TO SELECT" : "DRAG THE WHEEL TO SCROLL · CLICK CENTER TO SELECT · ↑↓ ENTER"}
         </div>
       </div>
 
       {openSection && zoomPhase === "open" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "auto", animation: "contentIn 0.35s ease forwards" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "auto", animation: "contentIn 0.5s ease forwards" }}>
           <PageWrapper theme={theme} title={sectionTitle} onBack={handleBack} onToggle={toggleMode} mode={mode} isMobile={isMobile}>
             {ContentComponent && <ContentComponent theme={theme} isMobile={isMobile} />}
           </PageWrapper>
@@ -464,7 +465,7 @@ export default function App() {
       )}
 
       {openSection && zoomPhase === "closing" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "hidden", animation: "contentOut 0.35s ease forwards", pointerEvents: "none" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "hidden", animation: "contentOut 0.5s ease forwards", pointerEvents: "none" }}>
           <PageWrapper theme={theme} title={sectionTitle} onBack={() => {}} onToggle={() => {}} mode={mode} isMobile={isMobile}>
             {ContentComponent && <ContentComponent theme={theme} isMobile={isMobile} />}
           </PageWrapper>

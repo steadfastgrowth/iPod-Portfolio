@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sales Methodology — Steadfast Growth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f8f6f1;
+    --accent: #2563EB;
+    --accent-light: #7ba4f2;
+    --accent-bg: #f0f4ff;
+    --muted: #6b6560;
+    --border: #d8d3cc;
+    --border-light: #e8e4dd;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 3px rgba(26,26,26,0.06);
+    --shadow-lg: 0 12px 40px rgba(26,26,26,0.1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.7;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .topbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(248,246,241,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-light);
+    transition: box-shadow 0.3s;
+  }
+  .topbar.scrolled { box-shadow: var(--shadow-sm); }
+  .topbar-inner {
+    max-width: 1100px; margin: 0 auto; padding: 16px 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .brand {
+    font-family: 'DM Serif Display', serif; font-size: 18px;
+    color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .brand span { color: var(--accent); }
+  .topbar-links { display: flex; gap: 28px; list-style: none; }
+  .topbar-links a {
+    text-decoration: none; color: var(--muted); font-size: 13px;
+    font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .topbar-links a:hover { color: var(--accent); }
+
+  .hero { padding: 160px 32px 80px; max-width: 1100px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px; opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 5.5vw, 64px); line-height: 1.1;
+    letter-spacing: -0.02em; max-width: 740px; margin-bottom: 28px;
+    opacity: 0; animation: fadeUp 0.6s 0.35s forwards;
+  }
+  .hero-sub {
+    font-size: 18px; color: var(--muted); max-width: 600px; line-height: 1.75;
+    opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
+  }
+
+  .stats-row {
+    margin-top: 48px; display: flex; gap: 0;
+    opacity: 0; animation: fadeUp 0.6s 0.65s forwards;
+  }
+  .stat-item {
+    flex: 1; padding: 28px 32px;
+    background: var(--white); border: 1px solid var(--border);
+  }
+  .stat-item:first-child { border-radius: 12px 0 0 12px; }
+  .stat-item:last-child { border-radius: 0 12px 12px 0; }
+  .stat-item:not(:first-child) { border-left: none; }
+  .stat-number {
+    font-family: 'DM Serif Display', serif; font-size: 32px;
+    color: var(--accent); line-height: 1.1; margin-bottom: 4px;
+  }
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+  }
+
+  .bio-line {
+    margin-top: 36px; padding: 24px 0; border-top: 1px solid var(--border-light);
+    max-width: 640px; opacity: 0; animation: fadeUp 0.6s 0.8s forwards;
+  }
+  .bio-line p { font-size: 15px; color: var(--muted); line-height: 1.75; }
+  .bio-line strong { color: var(--ink); font-weight: 500; }
+
+  .divider { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  .divider hr { border: none; height: 1px; background: var(--border); }
+
+  .section-intro {
+    max-width: 1100px; margin: 0 auto; padding: 80px 32px 0;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .section-intro.visible { opacity: 1; transform: translateY(0); }
+  .section-intro-eyebrow {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 16px;
+  }
+  .section-intro h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 3.5vw, 38px); line-height: 1.15;
+    letter-spacing: -0.01em; max-width: 500px; margin-bottom: 16px;
+  }
+  .section-intro p {
+    font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7;
+  }
+
+  .phases { max-width: 1100px; margin: 0 auto; padding: 40px 32px 80px; }
+  .phase {
+    display: grid; grid-template-columns: 220px 1fr; gap: 48px;
+    padding: 56px 0; border-bottom: 1px solid var(--border-light);
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .phase.visible { opacity: 1; transform: translateY(0); }
+  .phase:last-child { border-bottom: none; }
+  .phase-number {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 8px;
+  }
+  .phase-title {
+    font-family: 'DM Serif Display', serif; font-size: 26px;
+    line-height: 1.25; letter-spacing: -0.01em;
+    position: sticky; top: 100px;
+  }
+  .phase-body p { margin-bottom: 16px; font-size: 15.5px; }
+  .phase-body p:last-child { margin-bottom: 0; }
+
+  .framework-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 12px; padding: 32px; margin: 24px 0;
+    box-shadow: var(--shadow-sm);
+  }
+  .framework-card-header {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+  }
+  .framework-badge {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; background: var(--accent); color: var(--white);
+    padding: 5px 14px; border-radius: 6px;
+  }
+  .framework-card-title { font-family: 'DM Serif Display', serif; font-size: 18px; }
+  .framework-steps { display: flex; flex-direction: column; gap: 16px; }
+  .framework-step { display: grid; grid-template-columns: 40px 1fr; gap: 16px; align-items: start; }
+  .step-letter {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--accent-bg); color: var(--accent);
+    font-family: 'DM Serif Display', serif; font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-content strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .step-content p { font-size: 14.5px; color: var(--muted); margin: 0; line-height: 1.6; }
+
+  .question-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+  .question-item {
+    background: var(--white); border: 1px solid var(--border-light);
+    border-radius: 10px; padding: 16px 20px; font-size: 14.5px; line-height: 1.55;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .question-item:hover { border-color: var(--accent-light); box-shadow: var(--shadow-sm); }
+
+  .callout {
+    display: flex; align-items: flex-start; gap: 16px;
+    background: var(--accent-bg); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 24px 0;
+  }
+  .callout-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .callout p { font-size: 14.5px; margin: 0; line-height: 1.6; }
+
+  .rule-list { list-style: none; margin: 16px 0; }
+  .rule-list li {
+    position: relative; padding: 10px 0 10px 28px; font-size: 15px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .rule-list li:last-child { border-bottom: none; }
+  .rule-list li::before {
+    content: ''; position: absolute; left: 0; top: 18px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent); opacity: 0.7;
+  }
+
+  .cta-section { max-width: 1100px; margin: 0 auto; padding: 0 32px 100px; }
+  .cta-inner {
+    background: var(--ink); border-radius: 16px; padding: 72px 56px;
+    text-align: center; box-shadow: var(--shadow-lg);
+  }
+  .cta-inner h2 {
+    font-family: 'DM Serif Display', serif; font-size: clamp(28px, 3.5vw, 38px);
+    color: var(--paper); margin-bottom: 32px;
+  }
+  .cta-button {
+    display: inline-block; padding: 16px 40px;
+    background: var(--accent); color: var(--white);
+    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600;
+    letter-spacing: 0.02em; text-decoration: none;
+    border-radius: 10px; transition: background 0.2s, transform 0.15s;
+  }
+  .cta-button:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+  .footer { max-width: 1100px; margin: 0 auto; padding: 0 32px 60px; text-align: center; }
+  .footer p { font-size: 13px; color: var(--muted); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 768px) {
+    .phase { grid-template-columns: 1fr; gap: 16px; }
+    .phase-title { position: static; }
+    .question-grid { grid-template-columns: 1fr; }
+    .quick-ref-inner { grid-template-columns: 1fr; padding: 36px 28px; }
+    .hero { padding: 130px 20px 60px; }
+    .phases { padding: 40px 20px; }
+    .topbar-links { display: none; }
+    .stats-row { flex-direction: column; }
+    .stat-item { border-radius: 0 !important; border-left: 1px solid var(--border) !important; }
+    .stat-item:first-child { border-radius: 12px 12px 0 0 !important; }
+    .stat-item:last-child { border-radius: 0 0 12px 12px !important; }
+    .stat-item:not(:first-child) { border-top: none; }
+    .section-intro { padding: 60px 20px 0; }
+    .quick-ref { padding: 0 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topbar" id="topbar">
+  <div class="topbar-inner">
+    <a href="#" class="brand">Steadfast <span>Growth</span></a>
+    <ul class="topbar-links">
+      <li><a href="#process">Process</a></li>
+      <li><a href="#discovery">Discovery</a></li>
+      <li><a href="#presentation">Presentation</a></li>
+      <li><a href="#close">Close</a></li>
+      <li><a href="#execution">Execution</a></li>
+    </ul>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">Sales Methodology / Steadfast Growth</div>
+  <h1>How I Close Deals for Your Business</h1>
+  <p class="hero-sub">I've spent my entire career helping businesses grow — phones, email, demos, strategy, outbound systems. This is the structured process behind the results.</p>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-number">$3M+</div>
+      <div class="stat-label">Pipeline Generated</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">$700k+</div>
+      <div class="stat-label">Revenue Closed</div>
+    </div>
+
+  </div>
+
+  <div class="bio-line">
+    <p>I've built partner networks from scratch, held team records, and created outbound systems used by entire sales orgs. <strong>Give me a problem and I'll find a way to make it work.</strong> That's what Steadfast Growth is — everything I've learned, applied to businesses that need help generating revenue.</p>
+  </div>
+</section>
+
+<div class="divider"><hr></div>
+
+<div class="section-intro" id="process">
+  <div class="section-intro-eyebrow">The Process</div>
+  <h2>Seven phases. One goal: closed revenue.</h2>
+  <p>Every engagement follows this structured, prospect-first methodology — built for B2B, SaaS, and complex services sales.</p>
+</div>
+
+<section class="phases">
+
+  <div class="phase">
+    <div>
+      <div class="phase-number">Phase 01</div>
+      <h2 class="phase-title">Pre-Call<br>Preparation</h2>
+    </div>
+    <div class="phase-body">
+      <p>Every call begins before the call. I research the prospect thoroughly — LinkedIn, company signals, recent funding, press, prior engagement history — so the conversation starts with context, not cold intros.</p>
+      <div class="callout">
+        <span class="callout-icon">⚡</span>
+        <p><strong>Before every call:</strong> Tailored value prop with 3–5 outcome-driven bullets, pricing overview, pre-mapped objection responses, 2–3 relevant success stories, and a clear call goal — whether that's uncovering pain, qualifying budget, or closing a pilot.</p>
+      </div>
+      <p>Tech check, CRM notes open, screen share ready. No scrambling. I walk in locked and loaded.</p>
+    </div>
+  </div>
+
+  <div class="phase" id="discovery">
+    <div>
+      <div class="phase-number">Phase 02</div>
+      <h2 class="phase-title">The Call<br>Opener</h2>
+    </div>
+    <div class="phase-body">
+      <p>The first 30–60 seconds set the tone for the entire conversation. I use a three-part framework that respects the prospect's time, reduces resistance, and creates a collaborative dynamic from the jump.</p>
+      <div class="framework-card">
+        <div class="framework-card-header">
+          <span class="framework-badge">ACE</span>
+          <span class="framework-card-title">Opening Framework</span>
+        </div>
+        <div class="framework-steps">
+          <div class="framework-step">
+            <div class="step-letter">A</div>
+            <div class="step-content">
+              <strong>Acknowledge</strong>
+              <p>Respect their time immediately. Reference their role, company, or a recent win to signal this isn't a generic call.</p>
+            </div>
+          </div>
+          <div class="framework-step">
+            <div class="step-letter">C</div>
+            <div class="step-content">
+              <strong>Confirm</strong>
+              <p>Lock in the time block. "We've got 30 minutes — does that still work?" Sets boundaries and earns trust early.</p>
+            </div>
+          </div>
+          <div class="framework-step">
+            <div class="step-letter">E</div>
+            <div class="step-content">
+              <strong>Set Expectations</strong>
+              <p>Share a quick agenda and invite them to add to it. Ends with a verbal "yes" — buy-in before the pitch ever starts.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div>
+      <div class="phase-number">Phase 03</div>
+      <h2 class="phase-title">Discovery &<br>Qualification</h2>
+    </div>
+    <div class="phase-body">
+      <p>This is where deals are won or lost. I spend 10–20 minutes uncovering the real pain — not surface-level frustrations, but the impact on time, money, and team capacity. The ratio is 80% listening, 20% asking.</p>
+      <div class="question-grid">
+        <div class="question-item">"What prompted you to take this call right now?"</div>
+        <div class="question-item">"What's the biggest challenge you're facing with [area] currently?"</div>
+        <div class="question-item">"How long has this been an issue — and what's it costing you?"</div>
+        <div class="question-item">"What have you tried so far? What's working and what isn't?"</div>
+        <div class="question-item">"What does ideal success look like in the next 6–12 months?"</div>
+        <div class="question-item">"Who else is involved in a decision like this?"</div>
+      </div>
+      <div class="callout">
+        <span class="callout-icon">🎯</span>
+        <p><strong>Active mirroring:</strong> "So if I'm hearing right, [pain] is costing you roughly [impact] per quarter — is that accurate?" Confirms understanding and lets the prospect hear their own problem reflected back with clarity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase" id="presentation">
+    <div>
+      <div class="phase-number">Phase 04</div>
+      <h2 class="phase-title">Value<br>Presentation</h2>
+    </div>
+    <div class="phase-body">
+      <p>I never demo features in a vacuum. Every capability shown ties directly to a pain or goal the prospect just articulated. The presentation is tailored on the fly based on what came out of discovery.</p>
+      <ul class="rule-list">
+        <li><strong>Lead with outcomes, not features.</strong> The prospect cares about results — reduced churn, more pipeline, faster onboarding — not a feature list.</li>
+        <li><strong>Mini-stories over slides.</strong> "A similar company was facing [their exact pain]. After implementing [solution], they reduced [metric] by X% in Y months."</li>
+        <li><strong>8–12 minutes max.</strong> Focused on 2–4 key capabilities tied to their answers. No feature dumps.</li>
+        <li><strong>Check in frequently.</strong> "Does that address [pain point] for you?" — keeps it two-way and surfaces hidden objections early.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase" id="close">
+    <div>
+      <div class="phase-number">Phase 05</div>
+      <h2 class="phase-title">Objection<br>Handling<br>&amp; Close</h2>
+    </div>
+    <div class="phase-body">
+      <p>Hesitation is not rejection — it's information. When a prospect stalls, pushes back on budget, or needs stakeholder buy-in, I work through it with a structured loop that's persistent without being pushy.</p>
+      <div class="framework-card">
+        <div class="framework-card-header">
+          <span class="framework-badge">AAA</span>
+          <span class="framework-card-title">Objection &amp; Close Loop</span>
+        </div>
+        <div class="framework-steps">
+          <div class="framework-step">
+            <div class="step-letter">A</div>
+            <div class="step-content">
+              <strong>Acknowledge</strong>
+              <p>Repeat the concern back neutrally. "That's fair — so it sounds like budget is the main thing holding you back right now." No dismissal, no defensiveness.</p>
+            </div>
+          </div>
+          <div class="framework-step">
+            <div class="step-letter">A</div>
+            <div class="step-content">
+              <strong>Associate</strong>
+              <p>Link the concern to successful buyers. "That's actually something I hear from almost all of our highest-ROI customers before they commit."</p>
+            </div>
+          </div>
+          <div class="framework-step">
+            <div class="step-letter">A</div>
+            <div class="step-content">
+              <strong>Ask</strong>
+              <p>Trial close or direct ask. "If we could fully address that concern, would you be ready to move forward?" — followed by specific next-step options.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 16px;">This loop runs 3–5 times per call as needed. The best closers are persistent yet empathetic — knowing when to push and when to pause.</p>
+      <div class="callout">
+        <span class="callout-icon">📊</span>
+        <p><strong>Closing prompts:</strong> "On a scale of 1–10, how confident are you this solves [pain]? What would take it to a 10?" — "What would need to happen for this to become a no-brainer yes?" — "Shall we get the paperwork started so we can lock in [benefit]?"</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div>
+      <div class="phase-number">Phase 06</div>
+      <h2 class="phase-title">Trial Close &amp;<br>Next Steps</h2>
+    </div>
+    <div class="phase-body">
+      <p>No call ends without a clear outcome. Before wrapping, I summarize what we covered, confirm fit, and ask for a specific commitment.</p>
+      <ul class="rule-list">
+        <li><strong>Fit check:</strong> "Based on everything we've covered, does this feel like a strong fit for where you're trying to go?"</li>
+        <li><strong>Recap:</strong> "You're dealing with [pain], this solves it by [how], and next we'd [next step]."</li>
+        <li><strong>Commitment ask:</strong> "Are you comfortable moving to [proposal / pilot / contract / stakeholder intro]?"</li>
+        <li><strong>If not ready:</strong> Book a firm follow-up with a specific date, time, and deliverable attached.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="phase" id="execution">
+    <div>
+      <div class="phase-number">Phase 07</div>
+      <h2 class="phase-title">Post-Call<br>Execution</h2>
+    </div>
+    <div class="phase-body">
+      <p>The deal doesn't end when the call ends. Execution after the conversation is what separates pipeline from revenue.</p>
+      <ul class="rule-list">
+        <li><strong>Follow-up email within 30 minutes.</strong> Recap key pains, reiterate value, attach relevant docs, and confirm next steps with a calendar link.</li>
+        <li><strong>CRM logging.</strong> Detailed notes — pain points, objections raised, next actions, stakeholder map.</li>
+        <li><strong>Internal debrief</strong> on complex deals to align team and strategy.</li>
+        <li><strong>Nurture sequence if stalled.</strong> Value-add content, case studies, and short check-ins — no spray and pray.</li>
+      </ul>
+      <div class="callout">
+        <span class="callout-icon">🔁</span>
+        <p><strong>The goal:</strong> Every interaction moves the deal forward. No dead air, no lost momentum, no prospect left wondering what happens next.</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2>Want this for your business?</h2>
+    <a href="https://calendly.com/john-steadfastgrowth/30min" target="_blank" rel="noopener" class="cta-button">Book a Call</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Steadfast Growth LLC — Fractional AE & Revenue Strategy</p>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('topbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.phase, .section-intro').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

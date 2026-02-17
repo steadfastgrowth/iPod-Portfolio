@@ -12,7 +12,7 @@ const MENU_ITEMS = [
 
 const PROJECTS = [
   { name: "Steadfast Growth LLC", role: "Founder & Lead Sales Guy", description: "Revenue strategy and fractional AE services for businesses that need help generating revenue.", status: "Active", url: "https://steadfastgrowth.io" },
-  { name: "QuotaCards", role: "Founder", description: "A collectible trading card platform for sales professionals. Think Topps, but for closers.", status: "Coming Soon" },
+  { name: "QuotaCards", role: "Founder", description: "A collectible trading card platform for sales professionals. Think Topps, but for closers.", status: "Launching March 2nd", url: "https://quota-cards.com" },
   { name: "Vibe Coding", role: "Builder", description: "I build apps, tools, and automations by collaborating with AI. From Chrome extensions to full web apps — if I can dream it, I can ship it.", status: "Ongoing" },
 ];
 

@@ -48,7 +48,7 @@
   .hero {
     max-width: 700px;
     margin: 0 auto;
-    padding: 5rem 2rem 4rem;
+    padding: 3rem 2rem 2rem;
   }
   .eyebrow {
     font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
@@ -60,14 +60,14 @@
     font-family: 'DM Serif Display', serif;
     font-size: clamp(2rem, 5vw, 2.8rem);
     line-height: 1.15; color: #f8fafc; font-weight: 400;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.75rem;
   }
   h1 em { font-style: italic; color: var(--accent2); }
   .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
   .hero-meta {
     display: flex; gap: 1.75rem; flex-wrap: wrap;
     font-size: 13px; color: var(--dim);
-    border-top: 1px solid var(--border); padding-top: 1.25rem;
+    border-top: 1px solid var(--border); padding-top: 0.85rem; margin-top: 0.85rem;
   }
   .hero-meta strong { color: var(--muted); }
 
@@ -124,6 +124,14 @@
   .phase-price { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: #f8fafc; white-space: nowrap; }
   .pay-note { font-size: 12.5px; color: var(--dim); margin-top: 0.75rem; }
 
+  /* ROI */
+  .roi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.25rem; }
+  .roi-card { background: var(--bg2); padding: 1.4rem 1.5rem; }
+  .roi-card .roi-stat { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: var(--accent2); line-height: 1; margin-bottom: 0.3rem; }
+  .roi-card strong { display: block; font-size: 13.5px; color: #f8fafc; margin-bottom: 0.25rem; }
+  .roi-card p { font-size: 12.5px; color: var(--dim); line-height: 1.65; }
+  .roi-note { font-size: 12.5px; color: var(--dim); margin-top: 0.85rem; line-height: 1.6; font-style: italic; }
+
   /* WHY */
   .why-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.25rem; }
   .why-item { background: var(--bg2); padding: 1.25rem 1.5rem; }
@@ -156,6 +164,7 @@
   <a href="#" class="nav-brand">Steadfast Growth</a>
   <ul class="nav-links">
     <li><a href="#scope">Scope</a></li>
+    <li><a href="#roi">ROI</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#why">Why Me</a></li>
     <li><a href="#next">Next Steps</a></li>
@@ -164,8 +173,7 @@
 
 <section class="hero">
   <div class="eyebrow">Proposal for Adam Knorr</div>
-  <h1>Should you build an <em>OpenClaw</em> assistant?</h1>
-  <p class="hero-sub">Let's find out.</p>
+  <h1>An OpenClaw setup, built around <em>how you work.</em></h1>
   <div class="hero-meta">
     <span><strong>From:</strong> John Ciannello, Steadfast Growth LLC</span>
     <span><strong>Date:</strong> February 17, 2026</span>
@@ -186,7 +194,7 @@
         <li>Walk through your workflows: content, client comms, research, and internal knowledge</li>
         <li>Figure out what OpenClaw gives you that you don't already have</li>
         <li>Map out the real cost: API usage and setup time vs. what you're paying now</li>
-        <li>Send you a written Go/No-Go with the reasoning behind it</li>
+        <li>Send you a written Recommendation with the reasoning behind it</li>
       </ul>
       <div class="tag">Deliverable: 1-page written recommendation</div>
     </div>
@@ -194,7 +202,7 @@
     <div class="phase">
       <div class="phase-label">Phase 02 / Implementation</div>
       <h3>Set it up and actually use it.</h3>
-      <p>If Phase 1 says go, I'll get OpenClaw configured and integrated into your workflows. OpenClaw is new enough that we'll figure some things out as we go. You'll end up with something that's actually running and actually yours.</p>
+      <p>I'll get OpenClaw configured and integrated into your workflows. OpenClaw is new enough that we'll figure some things out as we go. You'll end up with something that's actually running and actually yours.</p>
       <ul>
         <li>Full OpenClaw setup and configuration</li>
         <li>Workflow integration for content, client comms, research, and internal Q&A</li>
@@ -208,28 +216,94 @@
 
   <hr>
 
+  <div class="section" id="roi">
+    <div class="section-label">Return on Investment</div>
+    <h2>What you're actually building.</h2>
+
+    <div class="roi-grid">
+      <div class="roi-card">
+        <div class="roi-stat">5+ hrs/wk</div>
+        <strong>It pays for itself fast</strong>
+        <p>If this saves you 5 hours a week on content, research, and comms, that's 20 hours a month back. At $125/hr of your own time, the setup pays for itself in the first month.</p>
+      </div>
+      <div class="roi-card">
+        <div class="roi-stat">vs. $1,500+/mo</div>
+        <strong>Cheaper than a part-time VA</strong>
+        <p>A part-time assistant to handle research, drafts, and follow-ups runs $1,500-2,000 a month. This is a one-time build that does the same work on demand, indefinitely.</p>
+      </div>
+      <div class="roi-card">
+        <div class="roi-stat">Weeks, not months</div>
+        <strong>Skip the learning curve</strong>
+        <p>You could set this up yourself. Most people who try spend weeks on installation, prompt tuning, and troubleshooting and still end up with something half-baked. This gets you to a working setup without the detour.</p>
+      </div>
+      <div class="roi-card">
+        <div class="roi-stat">Day one</div>
+        <strong>Built around how you work</strong>
+        <p>A generic install isn't worth much. The value is in configuring it around your actual workflows — content, comms, research — so it's useful immediately, not eventually.</p>
+      </div>
+    </div>
+    <p class="roi-note">These are directional. Part of Phase 1 is figuring out which of these actually apply to your business.</p>
+  </div>
+
+  <hr>
+
   <div class="section" id="pricing">
     <div class="section-label">Pricing</div>
-    <h2>Simple.</h2>
+    <h2>You pay based on what it's actually worth to you.</h2>
+    <p style="font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:1.75rem;">Here's how it works: you pay a small setup fee to get started. After 30 days, we have an honest conversation about how many hours a week it's saving you. You pay the amount that matches that. If it didn't move the needle, we talk about it — no pressure.</p>
 
-    <div class="bundle">
-      <div class="bundle-eyebrow">Best Value / Full Engagement</div>
-      <h3>Phase 1 + Phase 2 Together</h3>
-      <div class="bundle-price">$2,500</div>
-      <div class="bundle-terms">50% upfront · 50% when you're live · Phase 1 refunded if we stop there</div>
-      <ul>
-        <li>Discovery and written Go/No-Go recommendation</li>
-        <li>Full OpenClaw setup and configuration</li>
-        <li>Workflow integration across your four use cases</li>
-        <li>Walkthrough, documentation, and 30 days support</li>
-      </ul>
-    </div>
+    <div style="display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:1rem;">
 
-    <div class="phase-only">
-      <p><strong style="color:#f8fafc;">Phase 1 Only</strong><span>Want the recommendation before committing. $500 rolls into the bundle if you continue.</span></p>
-      <div class="phase-price">$500</div>
+      <div style="background:var(--bg2);padding:1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:1rem;align-items:start;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;">Tier 1</div>
+          <div style="font-size:14px;font-weight:600;color:#f8fafc;margin-bottom:0.3rem;">Saving 2-3 hours a week</div>
+          <div style="font-size:12.5px;color:var(--dim);line-height:1.6;">One agent built for your biggest time sink — most likely content drafting.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">To start</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#f8fafc;">$500</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">After 30 days</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent2);">$1,000</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);padding:1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:1rem;align-items:start;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;">Tier 2</div>
+          <div style="font-size:14px;font-weight:600;color:#f8fafc;margin-bottom:0.3rem;">Saving 4-6 hours a week</div>
+          <div style="font-size:12.5px;color:var(--dim);line-height:1.6;">Two agents — content drafting plus a research assistant that surfaces what you need without the digging.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">To start</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#f8fafc;">$750</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">After 30 days</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent2);">$1,500</div>
+        </div>
+      </div>
+
+      <div style="background:var(--bg2);padding:1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:1rem;align-items:start;">
+        <div>
+          <div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.4rem;">Tier 3</div>
+          <div style="font-size:14px;font-weight:600;color:#f8fafc;margin-bottom:0.3rem;">Saving 7-10 hours a week</div>
+          <div style="font-size:12.5px;color:var(--dim);line-height:1.6;">Full build — content, research, client comms, and course repurposing, all configured around how you work.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">To start</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:#f8fafc;">$1,000</div>
+        </div>
+        <div>
+          <div style="font-size:11px;color:var(--dim);margin-bottom:0.25rem;">After 30 days</div>
+          <div style="font-family:'DM Serif Display',serif;font-size:1.6rem;color:var(--accent2);">$2,500</div>
+        </div>
+      </div>
+
     </div>
-    <p class="pay-note">Invoiced. You never pay twice for the same work.</p>
+    <p style="font-size:12.5px;color:var(--dim);line-height:1.65;">All tiers include a discovery session, full setup, and 30 days of support. We pick the right tier together on the first call.</p>
   </div>
 
   <hr>
@@ -256,6 +330,32 @@
         <p>No waitlist. Reach out today and we can have a call booked this week.</p>
       </div>
     </div>
+
+    <div style="margin-top:1.5rem;">
+      <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">What I handle vs. what you do</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);">
+        <div style="background:var(--bg2);padding:1.25rem 1.5rem;">
+          <div style="font-size:12px;font-weight:600;color:#f8fafc;margin-bottom:0.6rem;">I handle</div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--green);flex-shrink:0;">✓</span>Step-by-step setup instructions written for you</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--green);flex-shrink:0;">✓</span>Building and tuning all the agent prompts</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--green);flex-shrink:0;">✓</span>Designing prompts around your voice and workflow</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--green);flex-shrink:0;">✓</span>Walking you through everything live on a call</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--green);flex-shrink:0;">✓</span>Troubleshooting for 30 days after we're done</div>
+          </div>
+        </div>
+        <div style="background:var(--bg2);padding:1.25rem 1.5rem;">
+          <div style="font-size:12px;font-weight:600;color:#f8fafc;margin-bottom:0.6rem;">You handle</div>
+          <div style="display:flex;flex-direction:column;gap:0.4rem;">
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--accent2);flex-shrink:0;">→</span>The actual install on your machine</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--accent2);flex-shrink:0;">→</span>Entering your own API keys</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--accent2);flex-shrink:0;">→</span>Two or three calls together to get it right</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--accent2);flex-shrink:0;">→</span>Actually using it day to day</div>
+            <div style="font-size:13px;color:var(--dim);display:flex;gap:0.5rem;"><span style="color:var(--accent2);flex-shrink:0;">→</span>Letting me know after 30 days what it saved you</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <hr>
@@ -275,7 +375,7 @@
       </li>
       <li>
         <div class="step-n">3</div>
-        <p><strong>Go/No-Go within a week.</strong> Written recommendation after our call. If it's a go, we move into implementation. If not, you'll know why.</p>
+        <p><strong>Recommendation within a week.</strong> Written recommendation after our call. If it's a go, we move into implementation. If not, you'll know why.</p>
       </li>
     </ul>
   </div>

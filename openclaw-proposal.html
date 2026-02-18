@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenClaw Proposal / John Ciannello</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0e17;
+    --bg2: #111827;
+    --border: #1e2d47;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --dim: #64748b;
+    --gold: #f59e0b;
+    --gold-dim: rgba(245,158,11,0.10);
+    --green: #10b981;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(10,14,23,0.95); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between; height: 54px;
+  }
+  .nav-brand { font-weight: 700; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent2); text-decoration: none; }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+  .nav-links a { color: var(--dim); text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent2); }
+
+  /* HERO */
+  .hero {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 5rem 2rem 4rem;
+  }
+  .eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 1.25rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .eyebrow::before { content: ''; display: inline-block; width: 18px; height: 1px; background: var(--accent); }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    line-height: 1.15; color: #f8fafc; font-weight: 400;
+    margin-bottom: 1.25rem;
+  }
+  h1 em { font-style: italic; color: var(--accent2); }
+  .hero-sub { font-size: 15px; color: var(--muted); line-height: 1.75; margin-bottom: 2.5rem; }
+  .hero-meta {
+    display: flex; gap: 1.75rem; flex-wrap: wrap;
+    font-size: 13px; color: var(--dim);
+    border-top: 1px solid var(--border); padding-top: 1.25rem;
+  }
+  .hero-meta strong { color: var(--muted); }
+
+  /* MAIN */
+  main { max-width: 700px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  .section { margin-top: 3.5rem; }
+  .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
+  h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #f8fafc; font-weight: 400; margin-bottom: 1rem; }
+  .section-body { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; }
+
+  /* PHASE CARDS */
+  .phase {
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+  }
+  .phase:hover { border-color: rgba(59,130,246,0.4); }
+  .phase-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent2); margin-bottom: 0.5rem; }
+  .phase h3 { font-size: 1rem; font-weight: 600; color: #f8fafc; margin-bottom: 0.6rem; }
+  .phase p { font-size: 13.5px; color: var(--muted); line-height: 1.75; margin-bottom: 0.75rem; }
+  .phase ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .phase li { font-size: 13px; color: var(--dim); line-height: 1.6; display: flex; gap: 0.5rem; }
+  .phase li::before { content: '→'; color: var(--accent); flex-shrink: 0; font-size: 11px; margin-top: 3px; }
+  .tag { display: inline-block; font-size: 11px; color: var(--green); background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); padding: 3px 10px; margin-top: 1rem; font-weight: 600; }
+
+  /* PRICING */
+  .bundle {
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,158,11,0.25);
+    padding: 1.75rem;
+    margin-bottom: 1rem;
+  }
+  .bundle-eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.35rem; }
+  .bundle h3 { font-family: 'DM Serif Display', serif; font-size: 1.2rem; color: #f8fafc; font-weight: 400; }
+  .bundle-price { font-family: 'DM Serif Display', serif; font-size: 2.5rem; color: var(--gold); line-height: 1; margin: 0.6rem 0 0.2rem; }
+  .bundle-terms { font-size: 12px; color: var(--dim); margin-bottom: 1rem; }
+  .bundle ul { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; }
+  .bundle li { font-size: 13px; color: var(--muted); display: flex; gap: 0.45rem; align-items: center; }
+  .bundle li::before { content: '✓'; color: var(--gold); font-weight: 700; font-size: 11px; flex-shrink: 0; }
+
+  .phase-only {
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  }
+  .phase-only p { font-size: 13.5px; color: var(--muted); }
+  .phase-only p span { display: block; font-size: 12px; color: var(--dim); margin-top: 2px; }
+  .phase-price { font-family: 'DM Serif Display', serif; font-size: 1.4rem; color: #f8fafc; white-space: nowrap; }
+  .pay-note { font-size: 12.5px; color: var(--dim); margin-top: 0.75rem; }
+
+  /* WHY */
+  .why-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 1.25rem; }
+  .why-item { background: var(--bg2); padding: 1.25rem 1.5rem; }
+  .why-item strong { display: block; font-size: 14px; color: #f8fafc; margin-bottom: 0.25rem; }
+  .why-item p { font-size: 13px; color: var(--dim); line-height: 1.7; }
+
+  /* STEPS */
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.25rem; }
+  .steps li { display: flex; gap: 0.9rem; align-items: flex-start; padding: 1rem 1.25rem; background: var(--bg2); border: 1px solid var(--border); }
+  .step-n { width: 20px; height: 20px; background: var(--accent); color: white; font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .steps p { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0; }
+  .steps strong { color: #f8fafc; }
+
+  /* CTA */
+  .cta { margin-top: 3.5rem; padding: 2.5rem 2rem; background: var(--bg2); border: 1px solid var(--border); border-top: 2px solid var(--accent); text-align: center; }
+  .cta h2 { font-family: 'DM Serif Display', serif; font-size: 1.6rem; color: #f8fafc; font-weight: 400; margin-bottom: 0.5rem; }
+  .cta p { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; }
+  .btn { display: inline-block; padding: 0.75rem 2rem; background: var(--accent); color: white; font-size: 12.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+  .btn:hover { background: #2563eb; }
+
+  footer { border-top: 1px solid var(--border); padding: 1.25rem 2rem; text-align: center; font-size: 12px; color: var(--dim); }
+  footer a { color: var(--accent2); text-decoration: none; }
+
+  @media (max-width: 540px) { .nav-links { display: none; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-brand">Steadfast Growth</a>
+  <ul class="nav-links">
+    <li><a href="#scope">Scope</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#why">Why Me</a></li>
+    <li><a href="#next">Next Steps</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="eyebrow">Proposal for Adam Knorr</div>
+  <h1>Should you build an <em>OpenClaw</em> assistant?</h1>
+  <p class="hero-sub">Let's find out.</p>
+  <div class="hero-meta">
+    <span><strong>From:</strong> John Ciannello, Steadfast Growth LLC</span>
+    <span><strong>Date:</strong> February 17, 2026</span>
+  </div>
+</section>
+
+<main>
+
+  <div class="section" id="scope">
+    <div class="section-label">What We'd Do</div>
+    <h2>Two phases. Stop after Phase 1 if the answer is no.</h2>
+
+    <div class="phase">
+      <div class="phase-label">Phase 01 / Discovery</div>
+      <h3>Is this actually worth it for you?</h3>
+      <p>We get on a call, I dig into how you're running your business and tell you whether OpenClaw moves the needle or whether your current tools already cover it.</p>
+      <ul>
+        <li>Walk through your workflows: content, client comms, research, and internal knowledge</li>
+        <li>Figure out what OpenClaw gives you that you don't already have</li>
+        <li>Map out the real cost: API usage and setup time vs. what you're paying now</li>
+        <li>Send you a written Go/No-Go with the reasoning behind it</li>
+      </ul>
+      <div class="tag">Deliverable: 1-page written recommendation</div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-label">Phase 02 / Implementation</div>
+      <h3>Set it up and actually use it.</h3>
+      <p>If Phase 1 says go, I'll get OpenClaw configured and integrated into your workflows. OpenClaw is new enough that we'll figure some things out as we go. You'll end up with something that's actually running and actually yours.</p>
+      <ul>
+        <li>Full OpenClaw setup and configuration</li>
+        <li>Workflow integration for content, client comms, research, and internal Q&A</li>
+        <li>Walkthrough until you're getting real daily value</li>
+        <li>Full documentation so you can maintain it yourself</li>
+        <li>30 days async support after go-live</li>
+      </ul>
+      <div class="tag">Deliverable: OpenClaw running, built around your workflows</div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="pricing">
+    <div class="section-label">Pricing</div>
+    <h2>Simple.</h2>
+
+    <div class="bundle">
+      <div class="bundle-eyebrow">Best Value / Full Engagement</div>
+      <h3>Phase 1 + Phase 2 Together</h3>
+      <div class="bundle-price">$2,500</div>
+      <div class="bundle-terms">50% upfront · 50% when you're live · Phase 1 refunded if we stop there</div>
+      <ul>
+        <li>Discovery and written Go/No-Go recommendation</li>
+        <li>Full OpenClaw setup and configuration</li>
+        <li>Workflow integration across your four use cases</li>
+        <li>Walkthrough, documentation, and 30 days support</li>
+      </ul>
+    </div>
+
+    <div class="phase-only">
+      <p><strong style="color:#f8fafc;">Phase 1 Only</strong><span>Want the recommendation before committing. $500 rolls into the bundle if you continue.</span></p>
+      <div class="phase-price">$500</div>
+    </div>
+    <p class="pay-note">Invoiced. You never pay twice for the same work.</p>
+  </div>
+
+  <hr>
+
+  <div class="section" id="why">
+    <div class="section-label">Why Me</div>
+    <h2>I use this stuff myself.</h2>
+
+    <div class="why-list">
+      <div class="why-item">
+        <strong>I built Chuck, my own AI assistant</strong>
+        <p>Custom tool for cold email, research, and business automation running on Anthropic's API. I know how to build AI workflows that actually get used.</p>
+      </div>
+      <div class="why-item">
+        <strong>I run OpenClaw in my own workflow</strong>
+        <p>I set it up for myself first. I know where it's solid and where it's still rough. That context matters when the tool is this new.</p>
+      </div>
+      <div class="why-item">
+        <strong>We'll figure some of this out together</strong>
+        <p>I haven't done this for 20 clients. OpenClaw is new and some things we'll work through as we go. I'd rather say that upfront.</p>
+      </div>
+      <div class="why-item">
+        <strong>Available now</strong>
+        <p>No waitlist. Reach out today and we can have a call booked this week.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="section" id="next">
+    <div class="section-label">Next Steps</div>
+    <h2>Pretty simple from here.</h2>
+
+    <ul class="steps">
+      <li>
+        <div class="step-n">1</div>
+        <p><strong>Book a call.</strong> 60 minutes, usually within a couple days.</p>
+      </li>
+      <li>
+        <div class="step-n">2</div>
+        <p><strong>I'll send a short intake form.</strong> A few questions so I can come prepared.</p>
+      </li>
+      <li>
+        <div class="step-n">3</div>
+        <p><strong>Go/No-Go within a week.</strong> Written recommendation after our call. If it's a go, we move into implementation. If not, you'll know why.</p>
+      </li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <h2>Let me know if you need me, Adam.</h2>
+    <p>Happy to answer questions before you decide.</p>
+    <a href="https://calendly.com/john-steadfastgrowth/30min" class="btn">Book a Call</a>
+  </div>
+
+</main>
+
+<footer>
+  John Ciannello &nbsp;·&nbsp; Steadfast Growth LLC &nbsp;·&nbsp; <a href="https://johnciannello.com">johnciannello.com</a>
+</footer>
+
+</body>
+</html>

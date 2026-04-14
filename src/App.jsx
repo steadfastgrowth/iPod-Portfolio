@@ -11,9 +11,8 @@ const MENU_ITEMS = [
 ];
 
 const PROJECTS = [
-  { name: "Steadfast Growth LLC", role: "Founder & Lead Sales Guy", description: "Revenue strategy and fractional AE services for businesses that need help generating revenue.", status: "Active", url: "https://steadfastgrowth.io" },
-  { name: "QuotaCards", role: "Founder", description: "A collectible trading card platform for sales professionals. Think Topps, but for closers.", status: "Launching March 2nd", url: "https://quota-cards.com" },
-  { name: "Vibe Coding", role: "Builder", description: "I build apps, tools, and automations by collaborating with AI. From Chrome extensions to full web apps — if I can dream it, I can ship it.", status: "Ongoing" },
+  { name: "Steadfast Growth", role: "Founder", description: "AI consulting for business owners. I build custom AI systems around how you already work — one-time setups, high-ROI automations, or a fully managed AI stack. Three tiers, no fluff.", status: "Active", url: "https://steadfastgrowth.io" },
+  { name: "Custom AI Builds", role: "Builder", description: "Lead gen systems, data automation, campaign analytics, client dashboards, workflow tools — built to solve real problems for real clients. If it's repeatable, I can automate it.", status: "Ongoing" },
 ];
 
 const PODCASTS = [
@@ -140,10 +139,10 @@ function NowPlayingContent({ theme, isMobile }) {
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: isMobile ? 26 : 32, fontWeight: 700, color: theme.pageText, letterSpacing: -0.5, marginBottom: 8 }}>John P. Ciannello</div>
         <div style={{ fontSize: 15, color: theme.pageSecondary, lineHeight: 1.7, marginBottom: 6 }}>Builder. Seller. Follower of Christ.</div>
-        <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Founder @ Steadfast Growth · BDM @ Praxis Careers</div>
+        <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Founder @ Steadfast Growth — AI Consulting for Business Owners</div>
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
-        {[{ emoji: "📈", name: "Steadfast Growth", sub: "Founder & Lead Sales Guy", url: "https://steadfastgrowth.io" }, { emoji: "🤝", name: "Praxis Careers", sub: "Business Development Manager" }].map((item, i) => (
+        {[{ emoji: "🤖", name: "Steadfast Growth", sub: "AI Consulting for Business Owners", url: "https://steadfastgrowth.io" }, { emoji: "🛠️", name: "Custom AI Builds", sub: "Tools & Automations for Clients" }].map((item, i) => (
           <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
             <div style={{ fontSize: 36, marginBottom: 10 }}>{item.emoji}</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: theme.pageText, marginBottom: 4 }}>{item.name}</div>
@@ -161,19 +160,18 @@ function NowPlayingContent({ theme, isMobile }) {
       </div>
       <GlassCard theme={theme} style={{ width: "100%", padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>I've spent my entire career helping businesses grow — and I've loved every bit of it.</p>
-          <p style={{ marginTop: 14 }}>Phones, email, demos, strategy — I've done it all.</p>
-          <p style={{ marginTop: 14 }}>I've generated over $3M in pipeline, closed over $700k in revenue, built a partner network from scratch, held team records, and created outbound systems used by entire sales orgs.</p>
+          <p>I've spent my career helping businesses grow — phones, email, demos, strategy, outbound systems, partner networks. I've done it all.</p>
+          <p style={{ marginTop: 14 }}>Now I build custom AI systems for business owners. Not courses. Not generic chatbots. Real tools built around how you already work — then handed off, run for you, or both.</p>
+          <p style={{ marginTop: 14 }}>I've generated over $3M in pipeline, closed over $700k in revenue, and built outbound systems used by entire sales orgs. Now I take that same operator mindset and apply it to AI.</p>
           <p style={{ marginTop: 14 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
-          <p style={{ marginTop: 14 }}>That's what Steadfast Growth is. I bring what I've learned to businesses that need help generating revenue.</p>
         </div>
       </GlassCard>
       <div style={{ display: "flex", gap: 12, width: "100%", flexDirection: isMobile ? "column" : "row" }}>
-        {[{ label: "Steadfast Growth", url: "https://calendly.com/john-steadfastgrowth/30min" }, { label: "Praxis", url: "https://calendly.com/john-praxis/30min" }].map((cal, i) => (
-          <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "22px 16px" }}>
+        {[{ label: "Free Intro Call", url: "https://calendly.com/john-steadfastgrowth/30min" }].map((cal, i) => (
+          <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "22px 16px", maxWidth: 320, margin: "0 auto" }}>
             <div style={{ fontSize: 22, marginBottom: 8 }}>📅</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: theme.pageText, marginBottom: 3 }}>{cal.label}</div>
-            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 10 }}>30 min chat</div>
+            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 10 }}>30 min · no pitch, no pressure</div>
             <div style={{ fontSize: 11, color: theme.pageAccent, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>Book Now ↗</div>
           </GlassCard>
         ))}
@@ -191,8 +189,8 @@ function AboutContent({ theme, isMobile }) {
         </div>
         <div>
           <div style={{ fontSize: isMobile ? 24 : 28, fontWeight: 700, color: theme.pageText, letterSpacing: -0.5, marginBottom: 4 }}>John P. Ciannello</div>
-          <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600, marginBottom: 14 }}>Founder @ Steadfast Growth · BDM @ Praxis Careers</div>
-          <div style={{ fontSize: 14, lineHeight: 1.8, color: theme.pageText }}>I've spent my entire career helping businesses grow — and I've loved every bit of it. Phones, email, demos, strategy — I've done it all.</div>
+          <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600, marginBottom: 14 }}>Founder @ Steadfast Growth — AI Consulting for Business Owners</div>
+          <div style={{ fontSize: 14, lineHeight: 1.8, color: theme.pageText }}>I build custom AI systems for business owners. Not courses, not chatbots — real tools built around how you already work.</div>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 28 }}>
@@ -206,9 +204,9 @@ function AboutContent({ theme, isMobile }) {
       <div style={{ height: 1, background: theme.pageDivider, marginBottom: 28 }} />
       <GlassCard theme={theme} style={{ padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>I've generated over $3M in pipeline, closed over $700k in revenue, built a partner network from scratch, held team records, and created outbound systems used by entire sales orgs.</p>
+          <p>I've generated over $3M in pipeline, closed over $700k in revenue, and built outbound systems used by entire sales orgs. Now I take that operator mindset and build AI tools for business owners.</p>
+          <p style={{ marginTop: 16 }}>One-time setups, custom automations, or a fully managed AI stack — I meet you where you are and build around how you already work.</p>
           <p style={{ marginTop: 16 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
-          <p style={{ marginTop: 16 }}>That's what Steadfast Growth is. I bring what I've learned to businesses that need help generating revenue.</p>
         </div>
       </GlassCard>
     </div>
@@ -300,8 +298,7 @@ function ContactContent({ theme, isMobile }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
           { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },
-          { icon: "📧", label: "Steadfast Growth", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
-          { icon: "📧", label: "Praxis", value: "john@joinpraxis.com", href: "mailto:john@joinpraxis.com" },
+          { icon: "📧", label: "Email", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },
         ].map((c, i) => (
           <GlassCard key={i} theme={theme} href={c.href} style={{ padding: "16px 20px" }}>
@@ -319,12 +316,11 @@ function ContactContent({ theme, isMobile }) {
       <div style={{ fontSize: 15, fontWeight: 700, color: theme.pageText, marginBottom: 16 }}>📅 Book a Call</div>
       <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 12 }}>
         {[
-          { label: "Steadfast Growth", url: "https://calendly.com/john-steadfastgrowth/30min" },
-          { label: "Praxis", url: "https://calendly.com/john-praxis/30min" },
+          { label: "Free Intro Call", url: "https://calendly.com/john-steadfastgrowth/30min" },
         ].map((cal, i) => (
           <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "24px 16px" }}>
             <div style={{ fontSize: 14, fontWeight: 700, color: theme.pageText, marginBottom: 4 }}>{cal.label}</div>
-            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 12 }}>30 min chat</div>
+            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 12 }}>30 min · no pitch, no pressure</div>
             <div style={{ fontSize: 11, color: theme.pageAccent, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>Book Now ↗</div>
           </GlassCard>
         ))}

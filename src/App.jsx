@@ -5,6 +5,7 @@ const MENU_ITEMS = [
   { id: "now-playing", label: "Now Playing", preview: "🎵" },
   { id: "about", label: "About", preview: "👤" },
   { id: "projects", label: "Projects", preview: "🚀" },
+  { id: "skills", label: "Agent Skills", preview: "🤖" },
   { id: "content", label: "Content", preview: "✍️" },
   { id: "experience", label: "Experience", preview: "💼" },
   { id: "contact", label: "Contact", preview: "📬" },
@@ -12,7 +13,18 @@ const MENU_ITEMS = [
 
 const PROJECTS = [
   { name: "Steadfast Growth", role: "Founder", description: "AI consulting for business owners. I build custom AI systems around how you already work — one-time setups, high-ROI automations, or a fully managed AI stack. Three tiers, no fluff.", status: "Active", url: "https://steadfastgrowth.io" },
+  { name: "Appeal IQ", role: "Founder", description: "CRE property tax appeal intelligence platform. Score portfolios, track filing deadlines, and produce client-facing analyses for commercial real estate advisory firms. Used by teams at Cushman & Wakefield and others.", status: "Live", url: "https://app.appealiq.org" },
+  { name: "Agent Skills", role: "Open Source", description: "Drop-in Claude Code skills for Generative Engine Optimization, SEO, content drafting, Reddit + HN community growth, and property tax appeal intel. MIT licensed.", status: "Open Source", url: "https://github.com/steadfastgrowth/agent-skills" },
   { name: "Custom AI Builds", role: "Builder", description: "Lead gen systems, data automation, campaign analytics, client dashboards, workflow tools — built to solve real problems for real clients. If it's repeatable, I can automate it.", status: "Ongoing" },
+];
+
+const SKILLS = [
+  { id: "mokara-geo", emoji: "🔍", name: "/mokara-geo", tag: "GEO", description: "Generative Engine Optimization audit. Checks whether a brand gets cited in ChatGPT, Claude, Perplexity, and Google AI Overviews for category queries — then recommends fixes." },
+  { id: "mokara-seo", emoji: "📈", name: "/mokara-seo", tag: "SEO", description: "SEO audit + keyword opportunity finder. Pulls GSC/GA4 data, runs a technical scan, surfaces the 5-10 moves that actually move rankings, and drafts content briefs." },
+  { id: "mokara-writer", emoji: "✍️", name: "/mokara-writer", tag: "Content", description: "Multi-channel content drafter — long-form articles, X threads, LinkedIn posts. Written in a brand's voice with a learning pass that improves the voice profile over time." },
+  { id: "mokara-reddit", emoji: "👽", name: "/mokara-reddit", tag: "Reddit", description: "Find high-intent Reddit threads for a brand's keywords, qualify them, and draft community-appropriate replies that won't get downvoted or banned." },
+  { id: "mokara-hn", emoji: "🟧", name: "/mokara-hn", tag: "HN", description: "Hacker News scout — find relevant Show HN / Ask HN / discussion threads where a brand can earn citations, plus draft comments that fit HN's tone." },
+  { id: "appeal-intel", emoji: "🏢", name: "/appeal-intel", tag: "CRE / Residential", description: "Property tax appeal intelligence (commercial + residential). Find over-assessed properties, score portfolios, generate briefs, and prep for hearings." },
 ];
 
 const PODCASTS = [
@@ -142,9 +154,13 @@ function NowPlayingContent({ theme, isMobile }) {
         <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Founder @ Steadfast Growth — AI Consulting for Business Owners</div>
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
-        {[{ emoji: "🤖", name: "Steadfast Growth", sub: "AI Consulting for Business Owners", url: "https://steadfastgrowth.io" }, { emoji: "🛠️", name: "Custom AI Builds", sub: "Tools & Automations for Clients" }].map((item, i) => (
-          <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
-            <div style={{ fontSize: 36, marginBottom: 10 }}>{item.emoji}</div>
+        {[
+          { emoji: "🤖", name: "Steadfast Growth", sub: "AI Consulting for Business Owners", url: "https://steadfastgrowth.io" },
+          { emoji: "🏢", name: "Appeal IQ", sub: "CRE Property Tax Intelligence", url: "https://app.appealiq.org" },
+          { emoji: "🛠️", name: "Agent Skills", sub: "Open-Source Claude Code Skills", url: "https://github.com/steadfastgrowth/agent-skills" },
+        ].map((item, i) => (
+          <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 180px", maxWidth: 260, padding: "22px 18px", textAlign: "center" }}>
+            <div style={{ fontSize: 34, marginBottom: 10 }}>{item.emoji}</div>
             <div style={{ fontSize: 15, fontWeight: 700, color: theme.pageText, marginBottom: 4 }}>{item.name}</div>
             <div style={{ fontSize: 12, color: theme.pageSecondary }}>{item.sub}</div>
           </GlassCard>
@@ -233,6 +249,43 @@ function ProjectsContent({ theme, isMobile }) {
   );
 }
 
+function SkillsContent({ theme, isMobile }) {
+  const installCmd = "git clone https://github.com/steadfastgrowth/agent-skills.git && cp -r agent-skills/*/ ~/.claude/skills/";
+  const [copied, setCopied] = useState(false);
+  const copy = () => { try { navigator.clipboard.writeText(installCmd); setCopied(true); setTimeout(() => setCopied(false), 1600); } catch(e) {} };
+  return (
+    <div>
+      <div style={{ fontSize: 14, color: theme.pageSecondary, marginBottom: 18, lineHeight: 1.6 }}>
+        Drop-in skills for <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer" style={{ color: theme.pageAccent, textDecoration: "none", fontWeight: 600 }}>Claude Code</a>. Install once, use as slash commands from any session. MIT licensed.
+      </div>
+      <GlassCard theme={theme} style={{ padding: 18, marginBottom: 22 }}>
+        <div style={{ fontSize: 11, color: theme.pageSecondary, letterSpacing: 0.8, textTransform: "uppercase", fontFamily: "monospace", marginBottom: 8 }}>Install all six</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: isMobile ? "wrap" : "nowrap" }}>
+          <code style={{ flex: 1, fontSize: 11, fontFamily: "'SF Mono', 'Fira Code', monospace", color: theme.pageText, background: theme.pageTag, padding: "10px 12px", borderRadius: 8, overflowX: "auto", whiteSpace: "nowrap", minWidth: 0 }}>{installCmd}</code>
+          <button onClick={copy} style={{ background: theme.pageAccent, color: "#fff", border: "none", padding: "10px 14px", borderRadius: 8, fontSize: 11, fontWeight: 700, letterSpacing: 0.8, textTransform: "uppercase", cursor: "pointer", fontFamily: "monospace", flexShrink: 0 }}>{copied ? "Copied" : "Copy"}</button>
+        </div>
+        <div style={{ marginTop: 10, fontSize: 12 }}>
+          <a href="https://github.com/steadfastgrowth/agent-skills" target="_blank" rel="noopener noreferrer" style={{ color: theme.pageAccent, textDecoration: "none", fontWeight: 600 }}>View on GitHub ↗</a>
+        </div>
+      </GlassCard>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+        {SKILLS.map((s, i) => (
+          <GlassCard key={i} theme={theme} href={`https://github.com/steadfastgrowth/agent-skills/tree/main/${s.id}`} style={{ padding: 20 }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10, gap: 12 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 12, minWidth: 0 }}>
+                <span style={{ fontSize: 22, flexShrink: 0 }}>{s.emoji}</span>
+                <code style={{ fontSize: 15, fontWeight: 700, color: theme.pageText, fontFamily: "'SF Mono', 'Fira Code', monospace" }}>{s.name}</code>
+              </div>
+              <Tag theme={theme}>{s.tag}</Tag>
+            </div>
+            <div style={{ fontSize: 13, lineHeight: 1.7, color: theme.pageSecondary }}>{s.description}</div>
+          </GlassCard>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ContentContent({ theme, isMobile }) {
   return (
     <div>
@@ -298,6 +351,8 @@ function ContactContent({ theme, isMobile }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
           { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },
+          { icon: "🏢", label: "Appeal IQ", value: "app.appealiq.org", href: "https://app.appealiq.org" },
+          { icon: "🐙", label: "GitHub", value: "/steadfastgrowth", href: "https://github.com/steadfastgrowth" },
           { icon: "📧", label: "Email", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },
         ].map((c, i) => (
@@ -329,7 +384,7 @@ function ContactContent({ theme, isMobile }) {
   );
 }
 
-const CONTENT_MAP = { "now-playing": NowPlayingContent, about: AboutContent, projects: ProjectsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
+const CONTENT_MAP = { "now-playing": NowPlayingContent, about: AboutContent, projects: ProjectsContent, skills: SkillsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
 
 function IPodScreen({ theme, selectedIndex }) {
   return (
@@ -346,7 +401,7 @@ function IPodScreen({ theme, selectedIndex }) {
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", background: theme.menuBg, overflow: "hidden" }}>
           {MENU_ITEMS.map((item, i) => (
-            <div key={item.id} style={{ padding: "0 10px", height: 25, minHeight: 25, maxHeight: 25, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
+            <div key={item.id} style={{ padding: "0 10px", height: 22, minHeight: 22, maxHeight: 22, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
               <span>{item.label}</span>
               <span style={{ fontSize: 9, opacity: 0.6 }}>›</span>
             </div>

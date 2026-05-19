@@ -282,7 +282,7 @@ function ContentContent({ theme, isMobile }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {[
             { label: "Blog", sub: "jpcblogs.com", url: "https://jpcblogs.com" },
-            { label: "Newsletter", sub: "Made 2 Build", url: "https://made2build.substack.com/" },
+            { label: "Newsletter", sub: "Made to Build", url: "https://made2build.substack.com/" },
             { label: "LinkedIn", sub: "/in/johnciannello", url: "https://www.linkedin.com/in/johnciannello/" },
           ].map((l, i) => (
             <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" style={{ color: theme.pageAccent, textDecoration: "none", fontSize: 13, fontWeight: 500, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", borderRadius: 10, background: theme.pageTag }}>

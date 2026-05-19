@@ -12,7 +12,7 @@ const MENU_ITEMS = [
 
 const PROJECTS = [
   { name: "Steadfast Growth", role: "Founder", description: "AI consulting for business owners. I build custom AI systems around how you already work — one-time setups, high-ROI automations, or a fully managed AI stack. Three tiers, no fluff.", status: "Active", url: "https://steadfastgrowth.io" },
-  { name: "Appeal IQ", role: "Founder", description: "CRE property tax appeal intelligence platform. Score portfolios, track filing deadlines, and produce client-facing analyses for commercial real estate advisory firms. Used by teams at Cushman & Wakefield and others.", status: "Live", url: "https://app.appealiq.org" },
+  { name: "Appeal IQ", role: "Founder", description: "CRE property tax appeal intelligence platform. Score portfolios, track filing deadlines, and produce client-facing analyses for commercial real estate advisory firms. Used by teams at Cushman & Wakefield and others.", status: "Live", url: "https://appealiq.org" },
   { name: "Custom AI Builds", role: "Builder", description: "Lead gen systems, data automation, campaign analytics, client dashboards, workflow tools — built to solve real problems for real clients. If it's repeatable, I can automate it.", status: "Ongoing" },
 ];
 
@@ -119,14 +119,50 @@ function Headshot({ size = 110, style = {} }) {
 }
 
 function PageWrapper({ theme, title, onBack, onToggle, mode, isMobile, children }) {
+  const isLight = mode === "light";
+  const desktopBg = isLight
+    ? "linear-gradient(160deg, #6e9bc4 0%, #4d7da8 45%, #2f5a85 100%)"
+    : "linear-gradient(160deg, #0a121f 0%, #111c2e 50%, #0a1018 100%)";
+  const menuBarBg = isLight
+    ? "linear-gradient(180deg, rgba(248,248,248,0.92) 0%, rgba(225,225,225,0.92) 100%)"
+    : "linear-gradient(180deg, rgba(48,48,52,0.92) 0%, rgba(28,28,32,0.92) 100%)";
+  const menuText = isLight ? "#1c1c1c" : "#e8e8e8";
+  const windowBorder = isLight ? "#7e7e7e" : "#000";
+  const titleBarBg = isLight
+    ? "linear-gradient(180deg, #f0f0f0 0%, #d1d1d1 100%)"
+    : "linear-gradient(180deg, #3a3d44 0%, #25282e 100%)";
+  const titleBarBorder = isLight ? "#9a9a9a" : "#0a0a0a";
+  const titleBarText = isLight ? "#2a2a2a" : "#d8d8d8";
+  const contentBg = theme.pageBg;
+  const [hoverClose, setHoverClose] = useState(false);
+  const clockLabel = (() => { try { return new Date().toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" }); } catch(e) { return ""; } })();
+
   return (
-    <div style={{ minHeight: "100vh", background: theme.pageBg, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", display: "flex", flexDirection: "column" }}>
-      <div style={{ position: "sticky", top: 0, zIndex: 50, background: theme.pageHeaderBg, padding: "0 16px", height: 46, display: "flex", alignItems: "center", justifyContent: "space-between", boxShadow: "0 1px 6px rgba(0,0,0,0.2)", flexShrink: 0 }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", color: theme.pageHeaderText, fontSize: 14, cursor: "pointer", fontWeight: 500, opacity: 0.9, fontFamily: "inherit", padding: 0 }}>‹ Menu</button>
-        <span style={{ fontSize: 14, fontWeight: 700, color: theme.pageHeaderText, letterSpacing: 0.3 }}>{title}</span>
-        <button onClick={onToggle} style={{ background: "none", border: "none", color: theme.pageHeaderText, fontSize: 14, cursor: "pointer", opacity: 0.7, fontFamily: "monospace", padding: 0 }}>{mode === "light" ? "●" : "○"}</button>
+    <div style={{ minHeight: "100vh", background: desktopBg, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", display: "flex", flexDirection: "column" }}>
+      <div style={{ height: 24, background: menuBarBg, backdropFilter: "blur(14px) saturate(1.4)", WebkitBackdropFilter: "blur(14px) saturate(1.4)", display: "flex", alignItems: "center", padding: "0 14px", color: menuText, gap: isMobile ? 12 : 18, flexShrink: 0, boxShadow: "0 1px 0 rgba(0,0,0,0.15)", zIndex: 60, position: "sticky", top: 0 }}>
+        <span style={{ fontSize: 13, lineHeight: 1, transform: "translateY(-1px)" }}>🍎</span>
+        <span style={{ fontWeight: 700, fontSize: 13 }}>PortfolioOS</span>
+        {!isMobile && ["File", "Edit", "View", "Window", "Help"].map(m => <span key={m} style={{ fontSize: 13, opacity: 0.85 }}>{m}</span>)}
+        <span style={{ marginLeft: "auto", display: "flex", gap: 14, alignItems: "center" }}>
+          <button onClick={onToggle} title="Toggle light/dark" style={{ background: "none", border: "none", color: menuText, fontSize: 13, cursor: "pointer", padding: 0, lineHeight: 1 }}>{isLight ? "◐" : "◑"}</button>
+          <span style={{ fontSize: 12, fontVariantNumeric: "tabular-nums" }}>{clockLabel}</span>
+        </span>
       </div>
-      <div style={{ flex: 1, maxWidth: 640, width: "100%", margin: "0 auto", padding: isMobile ? "28px 16px 48px" : "36px 28px 64px" }}>{children}</div>
+      <div style={{ flex: 1, padding: isMobile ? "12px 10px 18px" : "28px 32px 40px", display: "flex", justifyContent: "center", minHeight: 0 }}>
+        <div style={{ background: contentBg, borderRadius: isMobile ? 8 : 10, border: `1px solid ${windowBorder}`, boxShadow: "0 18px 60px rgba(0,0,0,0.45), 0 4px 12px rgba(0,0,0,0.25)", width: "100%", maxWidth: 960, display: "flex", flexDirection: "column", overflow: "hidden" }}>
+          <div style={{ background: titleBarBg, padding: isMobile ? "6px 10px" : "8px 14px", display: "flex", alignItems: "center", position: "relative", borderBottom: `1px solid ${titleBarBorder}`, flexShrink: 0, minHeight: 22 }}>
+            <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+              <button onClick={onBack} onMouseEnter={() => setHoverClose(true)} onMouseLeave={() => setHoverClose(false)} title="Close" aria-label="Close" style={{ width: 12, height: 12, borderRadius: "50%", background: "#ff5f57", border: "1px solid #e0443e", padding: 0, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", color: "rgba(80,0,0,0.7)", fontSize: 9, fontWeight: 900, lineHeight: 1 }}>{hoverClose ? "×" : ""}</button>
+              <span title="Minimize" style={{ width: 12, height: 12, borderRadius: "50%", background: "#febc2e", border: "1px solid #d89c1e" }} />
+              <span title="Zoom" style={{ width: 12, height: 12, borderRadius: "50%", background: "#28c840", border: "1px solid #1aa036" }} />
+            </div>
+            <span style={{ position: "absolute", left: 0, right: 0, textAlign: "center", fontSize: 13, fontWeight: 600, color: titleBarText, pointerEvents: "none", letterSpacing: 0.2 }}>{title}</span>
+          </div>
+          <div style={{ flex: 1, overflow: "auto", padding: isMobile ? "26px 18px 36px" : "40px 52px 56px" }}>
+            <div style={{ maxWidth: 720, margin: "0 auto" }}>{children}</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -145,7 +181,7 @@ function NowPlayingContent({ theme, isMobile }) {
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
         {[
           { emoji: "🤖", name: "Steadfast Growth", sub: "AI Consulting for Business Owners", url: "https://steadfastgrowth.io" },
-          { emoji: "🏢", name: "Appeal IQ", sub: "CRE Property Tax Intelligence", url: "https://app.appealiq.org" },
+          { emoji: "🏢", name: "Appeal IQ", sub: "CRE Property Tax Intelligence", url: "https://appealiq.org" },
         ].map((item, i) => (
           <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
             <div style={{ fontSize: 36, marginBottom: 10 }}>{item.emoji}</div>
@@ -246,7 +282,7 @@ function ContentContent({ theme, isMobile }) {
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
           {[
             { label: "Blog", sub: "jpcblogs.com", url: "https://jpcblogs.com" },
-            { label: "Newsletter", sub: "Another in the Fire", url: "https://another-in-the-fire.beehiiv.com/" },
+            { label: "Newsletter", sub: "Made 2 Build", url: "https://made2build.substack.com/" },
             { label: "LinkedIn", sub: "/in/johnciannello", url: "https://www.linkedin.com/in/johnciannello/" },
           ].map((l, i) => (
             <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" style={{ color: theme.pageAccent, textDecoration: "none", fontSize: 13, fontWeight: 500, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", borderRadius: 10, background: theme.pageTag }}>
@@ -302,7 +338,7 @@ function ContactContent({ theme, isMobile }) {
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
           { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },
-          { icon: "🏢", label: "Appeal IQ", value: "app.appealiq.org", href: "https://app.appealiq.org" },
+          { icon: "🏢", label: "Appeal IQ", value: "appealiq.org", href: "https://appealiq.org" },
           { icon: "🐙", label: "GitHub", value: "/steadfastgrowth", href: "https://github.com/steadfastgrowth" },
           { icon: "📧", label: "Email", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },
@@ -459,7 +495,7 @@ export default function App() {
       </div>
 
       {openSection && zoomPhase === "open" && (
-        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "auto", animation: "contentIn 0.25s ease forwards" }}>
+        <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, zIndex: 100, overflow: "hidden", animation: "contentIn 0.25s ease forwards" }}>
           <PageWrapper theme={theme} title={sectionTitle} onBack={handleBack} onToggle={toggleMode} mode={mode} isMobile={isMobile}>
             {ContentComponent && <ContentComponent theme={theme} isMobile={isMobile} />}
           </PageWrapper>

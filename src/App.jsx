@@ -138,8 +138,8 @@ function PageWrapper({ theme, title, onBack, onToggle, mode, isMobile, children 
   const clockLabel = (() => { try { return new Date().toLocaleString("en-US", { weekday: "short", hour: "numeric", minute: "2-digit" }); } catch(e) { return ""; } })();
 
   return (
-    <div style={{ minHeight: "100vh", background: desktopBg, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", display: "flex", flexDirection: "column" }}>
-      <div style={{ height: 24, background: menuBarBg, backdropFilter: "blur(14px) saturate(1.4)", WebkitBackdropFilter: "blur(14px) saturate(1.4)", display: "flex", alignItems: "center", padding: "0 14px", color: menuText, gap: isMobile ? 12 : 18, flexShrink: 0, boxShadow: "0 1px 0 rgba(0,0,0,0.15)", zIndex: 60, position: "sticky", top: 0 }}>
+    <div style={{ height: "100%", maxHeight: "100vh", background: desktopBg, fontFamily: "'Helvetica Neue', Helvetica, Arial, sans-serif", display: "flex", flexDirection: "column", overflow: "hidden" }}>
+      <div style={{ height: 24, background: menuBarBg, backdropFilter: "blur(14px) saturate(1.4)", WebkitBackdropFilter: "blur(14px) saturate(1.4)", display: "flex", alignItems: "center", padding: "0 14px", color: menuText, gap: isMobile ? 12 : 18, flexShrink: 0, boxShadow: "0 1px 0 rgba(0,0,0,0.15)", zIndex: 60 }}>
         <span style={{ fontSize: 13, lineHeight: 1, transform: "translateY(-1px)" }}>🍎</span>
         <span style={{ fontWeight: 700, fontSize: 13 }}>PortfolioOS</span>
         {!isMobile && ["File", "Edit", "View", "Window", "Help"].map(m => <span key={m} style={{ fontSize: 13, opacity: 0.85 }}>{m}</span>)}

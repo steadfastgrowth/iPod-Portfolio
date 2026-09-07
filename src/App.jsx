@@ -13,7 +13,7 @@ const MENU_ITEMS = [
 const PROJECTS = [
   { name: "Appeal IQ", role: "Founder", description: "Local-first property-tax appeal OS for advisory firms. County research, scoring, briefs. Sold inside consulting, not public download.", status: "Live", url: "https://appealiq.org" },
   { name: "Steadfast Growth", role: "Founder", description: "Private office AI; Steadfast Local = one machine, imaged/wired, you own it.", status: "Active", url: "https://steadfastgrowth.io" },
-  { name: "Fractional GTM", role: "Operator", description: "Sell Better, Seven Weeks Coffee, Sciata — full-cycle outbound + close, Clay-native.", status: "Recent" },
+  { name: "Fractional GTM", role: "Operator", description: "Full-cycle outbound + close, Clay-native.", status: "Recent" },
   { name: "Custom AI Builds", role: "Builder", description: "Lead gen, automation, dashboards when the problem is real and repeatable.", status: "Ongoing" },
 ];
 
@@ -29,7 +29,7 @@ const PODCASTS = [
 
 const EXPERIENCE = [
   { company: "Steadfast Growth / Appeal IQ", title: "Founder", period: "2025–Present", highlights: ["Built and sell Appeal IQ — local-first property-tax appeal OS for advisory firms", "Steadfast Local: one machine, imaged and wired, you own it", "Founder sales into tax shops"] },
-  { company: "Fractional GTM", title: "Contract", period: "2025–2026", highlights: ["Sell Better, Seven Weeks Coffee, Sciata", "Full-cycle outbound + close", "Clay-native"] },
+  { company: "Fractional GTM", title: "Contract", period: "2025–2026", highlights: ["Full-cycle outbound + close", "Clay-native"] },
   { company: "Praxis Careers", title: "Full-Cycle AE / Business Development Manager", period: "May 2025 – Aug 2026", highlights: ["Closed 36 partner deals in under 6 months", "$175k+ in potential job placements generated", "Built an entire hiring partner network from scratch", "Managed 1 BDR intern"] },
   { company: "Praxis Careers", title: "Admissions Lead", period: "May 2024 – April 2025", highlights: ["$2.4M in pipeline generated", "$420k+ in revenue closed", "20+ monthly screening calls (inbound & outbound)"] },
   { company: "Fourth / HotSchedules", title: "Sales Development Rep", period: "Nov 2023 – May 2024", highlights: ["120% avg quota attainment (246% in ramp month)", "$600k+ in qualified pipeline", "Team records: 6 meetings in a day, 11 in a week", "Built cadences used by entire Mid-Market segment"] },
@@ -204,7 +204,7 @@ function NowPlayingContent({ theme, isMobile }) {
       <GlassCard theme={theme} style={{ width: "100%", padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
           <p>I sell and I ship. Phones, email, demos, outbound, partner networks — then I build the system so it keeps running.</p>
-          <p style={{ marginTop: 14 }}>Fractional GTM for Sell Better, Seven Weeks Coffee, and Sciata. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
+          <p style={{ marginTop: 14 }}>Fractional GTM. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
           <p style={{ marginTop: 14 }}>Remote from Nashville. Open to a founding AE / early GTM seat (equity + side clients OK) while still building with select firms.</p>
           <p style={{ marginTop: 14 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
         </div>
@@ -247,7 +247,7 @@ function AboutContent({ theme, isMobile }) {
       <div style={{ height: 1, background: theme.pageDivider, marginBottom: 28 }} />
       <GlassCard theme={theme} style={{ padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>Fractional GTM for Sell Better, Seven Weeks Coffee, and Sciata. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
+          <p>Fractional GTM. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
           <p style={{ marginTop: 16 }}>Remote from Nashville. Open to a founding AE / early GTM seat (equity + side clients OK) while still building with select firms.</p>
           <p style={{ marginTop: 16 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
         </div>

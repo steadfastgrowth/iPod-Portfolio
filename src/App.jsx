@@ -11,9 +11,10 @@ const MENU_ITEMS = [
 ];
 
 const PROJECTS = [
-  { name: "Steadfast Growth", role: "Founder", description: "AI consulting for business owners. I build custom AI systems around how you already work — one-time setups, high-ROI automations, or a fully managed AI stack. Three tiers, no fluff.", status: "Active", url: "https://steadfastgrowth.io" },
-  { name: "Appeal IQ", role: "Founder", description: "CRE property tax appeal intelligence platform. Score portfolios, track filing deadlines, and produce client-facing analyses for commercial real estate advisory firms. Used by teams at Cushman & Wakefield and others.", status: "Live", url: "https://appealiq.org" },
-  { name: "Custom AI Builds", role: "Builder", description: "Lead gen systems, data automation, campaign analytics, client dashboards, workflow tools — built to solve real problems for real clients. If it's repeatable, I can automate it.", status: "Ongoing" },
+  { name: "Appeal IQ", role: "Founder", description: "Local-first property-tax appeal OS for advisory firms. County research, scoring, briefs. Sold inside consulting, not public download.", status: "Live", url: "https://appealiq.org" },
+  { name: "Steadfast Growth", role: "Founder", description: "Private office AI; Steadfast Local = one machine, imaged/wired, you own it.", status: "Active", url: "https://steadfastgrowth.io" },
+  { name: "Fractional GTM", role: "Operator", description: "Sell Better, Seven Weeks Coffee, Sciata — full-cycle outbound + close, Clay-native.", status: "Recent" },
+  { name: "Custom AI Builds", role: "Builder", description: "Lead gen, automation, dashboards when the problem is real and repeatable.", status: "Ongoing" },
 ];
 
 const PODCASTS = [
@@ -27,7 +28,9 @@ const PODCASTS = [
 ];
 
 const EXPERIENCE = [
-  { company: "Praxis Careers", title: "Full-Cycle AE / Business Development Manager", period: "May 2025 – Present", highlights: ["Closed 36 partner deals in under 6 months", "$175k+ in potential job placements generated", "Built an entire hiring partner network from scratch", "Managed 1 BDR intern"] },
+  { company: "Steadfast Growth / Appeal IQ", title: "Founder", period: "2025–Present", highlights: ["Built and sell Appeal IQ — local-first property-tax appeal OS for advisory firms", "Steadfast Local: one machine, imaged and wired, you own it", "Founder sales into tax shops"] },
+  { company: "Fractional GTM", title: "Contract", period: "2025–2026", highlights: ["Sell Better, Seven Weeks Coffee, Sciata", "Full-cycle outbound + close", "Clay-native"] },
+  { company: "Praxis Careers", title: "Full-Cycle AE / Business Development Manager", period: "May 2025 – Aug 2026", highlights: ["Closed 36 partner deals in under 6 months", "$175k+ in potential job placements generated", "Built an entire hiring partner network from scratch", "Managed 1 BDR intern"] },
   { company: "Praxis Careers", title: "Admissions Lead", period: "May 2024 – April 2025", highlights: ["$2.4M in pipeline generated", "$420k+ in revenue closed", "20+ monthly screening calls (inbound & outbound)"] },
   { company: "Fourth / HotSchedules", title: "Sales Development Rep", period: "Nov 2023 – May 2024", highlights: ["120% avg quota attainment (246% in ramp month)", "$600k+ in qualified pipeline", "Team records: 6 meetings in a day, 11 in a week", "Built cadences used by entire Mid-Market segment"] },
   { company: "Power Locker", title: "Operations Manager (Employee #5)", period: "Nov 2021 – June 2023", highlights: ["$150k+ in direct sales & investment revenue", "Managed vending fleets across U.S. and Canada"] },
@@ -176,12 +179,12 @@ function NowPlayingContent({ theme, isMobile }) {
       <div style={{ textAlign: "center" }}>
         <div style={{ fontSize: isMobile ? 26 : 32, fontWeight: 700, color: theme.pageText, letterSpacing: -0.5, marginBottom: 8 }}>John P. Ciannello</div>
         <div style={{ fontSize: 15, color: theme.pageSecondary, lineHeight: 1.7, marginBottom: 6 }}>Builder. Seller. Follower of Christ.</div>
-        <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Founder @ Steadfast Growth — AI Consulting for Business Owners</div>
+        <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600 }}>Nashville · Founder (AppealIQ / Steadfast) · Full-cycle GTM</div>
       </div>
       <div style={{ display: "flex", gap: 14, flexWrap: "wrap", justifyContent: "center", width: "100%" }}>
         {[
-          { emoji: "🤖", name: "Steadfast Growth", sub: "AI Consulting for Business Owners", url: "https://steadfastgrowth.io" },
-          { emoji: "🏢", name: "Appeal IQ", sub: "CRE Property Tax Intelligence", url: "https://appealiq.org" },
+          { emoji: "🏢", name: "Appeal IQ", sub: "Local-first tax appeal OS", url: "https://appealiq.org" },
+          { emoji: "🤖", name: "Steadfast Growth", sub: "Private office AI", url: "https://steadfastgrowth.io" },
         ].map((item, i) => (
           <GlassCard key={i} theme={theme} href={item.url} style={{ flex: "1 1 200px", maxWidth: 260, padding: "24px 20px", textAlign: "center" }}>
             <div style={{ fontSize: 36, marginBottom: 10 }}>{item.emoji}</div>
@@ -191,7 +194,7 @@ function NowPlayingContent({ theme, isMobile }) {
         ))}
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, width: "100%" }}>
-        {[{ n: "$3M+", l: "Pipeline" }, { n: "$700k+", l: "Revenue" }, { n: "120%", l: "Avg Quota" }].map((s, i) => (
+        {[{ n: "$3M+", l: "Pipeline" }, { n: "$600k+", l: "Closed" }, { n: "120%", l: "Quota" }].map((s, i) => (
           <GlassCard key={i} theme={theme} style={{ textAlign: "center", padding: "20px 12px" }}>
             <div style={{ fontSize: 22, fontWeight: 800, color: theme.pageAccent, fontFamily: "'SF Mono', monospace", letterSpacing: -1 }}>{s.n}</div>
             <div style={{ fontSize: 10, color: theme.pageSecondary, marginTop: 5, letterSpacing: 0.8, textTransform: "uppercase", fontFamily: "monospace" }}>{s.l}</div>
@@ -200,9 +203,9 @@ function NowPlayingContent({ theme, isMobile }) {
       </div>
       <GlassCard theme={theme} style={{ width: "100%", padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>I've spent my career helping businesses grow — phones, email, demos, strategy, outbound systems, partner networks. I've done it all.</p>
-          <p style={{ marginTop: 14 }}>Now I build custom AI systems for business owners. Not courses. Not generic chatbots. Real tools built around how you already work — then handed off, run for you, or both.</p>
-          <p style={{ marginTop: 14 }}>I've generated over $3M in pipeline, closed over $700k in revenue, and built outbound systems used by entire sales orgs. Now I take that same operator mindset and apply it to AI.</p>
+          <p>I sell and I ship. Phones, email, demos, outbound, partner networks — then I build the system so it keeps running.</p>
+          <p style={{ marginTop: 14 }}>Fractional GTM for Sell Better, Seven Weeks Coffee, and Sciata. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
+          <p style={{ marginTop: 14 }}>Remote from Nashville. Open to a founding AE / early GTM seat (equity + side clients OK) while still building with select firms.</p>
           <p style={{ marginTop: 14 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
         </div>
       </GlassCard>
@@ -229,12 +232,12 @@ function AboutContent({ theme, isMobile }) {
         </div>
         <div>
           <div style={{ fontSize: isMobile ? 24 : 28, fontWeight: 700, color: theme.pageText, letterSpacing: -0.5, marginBottom: 4 }}>John P. Ciannello</div>
-          <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600, marginBottom: 14 }}>Founder @ Steadfast Growth — AI Consulting for Business Owners</div>
-          <div style={{ fontSize: 14, lineHeight: 1.8, color: theme.pageText }}>I build custom AI systems for business owners. Not courses, not chatbots — real tools built around how you already work.</div>
+          <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600, marginBottom: 14 }}>Nashville · Founder (AppealIQ / Steadfast) · Full-cycle GTM</div>
+          <div style={{ fontSize: 14, lineHeight: 1.8, color: theme.pageText }}>Builder. Seller. Follower of Christ. I sell and I ship — then I build the system so it keeps running.</div>
         </div>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 28 }}>
-        {[{ n: "$3M+", l: "Pipeline" }, { n: "$700k+", l: "Revenue" }, { n: "120%", l: "Avg Quota" }].map((s, i) => (
+        {[{ n: "$3M+", l: "Pipeline" }, { n: "$600k+", l: "Closed" }, { n: "120%", l: "Quota" }].map((s, i) => (
           <GlassCard key={i} theme={theme} style={{ textAlign: "center", padding: "18px 12px" }}>
             <div style={{ fontSize: 20, fontWeight: 800, color: theme.pageAccent, fontFamily: "'SF Mono', monospace" }}>{s.n}</div>
             <div style={{ fontSize: 10, color: theme.pageSecondary, marginTop: 4, letterSpacing: 0.5, textTransform: "uppercase", fontFamily: "monospace" }}>{s.l}</div>
@@ -244,8 +247,8 @@ function AboutContent({ theme, isMobile }) {
       <div style={{ height: 1, background: theme.pageDivider, marginBottom: 28 }} />
       <GlassCard theme={theme} style={{ padding: 24 }}>
         <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>I've generated over $3M in pipeline, closed over $700k in revenue, and built outbound systems used by entire sales orgs. Now I take that operator mindset and build AI tools for business owners.</p>
-          <p style={{ marginTop: 16 }}>One-time setups, custom automations, or a fully managed AI stack — I meet you where you are and build around how you already work.</p>
+          <p>Fractional GTM for Sell Better, Seven Weeks Coffee, and Sciata. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
+          <p style={{ marginTop: 16 }}>Remote from Nashville. Open to a founding AE / early GTM seat (equity + side clients OK) while still building with select firms.</p>
           <p style={{ marginTop: 16 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
         </div>
       </GlassCard>
@@ -334,7 +337,7 @@ function ExperienceContent({ theme, isMobile }) {
 function ContactContent({ theme, isMobile }) {
   return (
     <div>
-      <div style={{ fontSize: 14, color: theme.pageSecondary, marginBottom: 24 }}>Let's connect.</div>
+      <div style={{ fontSize: 14, color: theme.pageSecondary, marginBottom: 24 }}>Open to remote founding AE / fractional GTM. Building with select clients on the side.</div>
       <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
         {[
           { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },

@@ -213,7 +213,7 @@ function NowPlayingContent({ theme, isMobile }) {
       <div style={{ display: "flex", gap: 12, width: "100%", flexDirection: isMobile ? "column" : "row" }}>
         {[
           { emoji: "📅", label: "Free Intro Call", sub: "30 min · no pitch, no pressure", cta: "Book Now ↗", url: "https://calendly.com/john-steadfastgrowth/30min" },
-          { emoji: "📄", label: "Resume", sub: "One page · HTML + PDF", cta: "View ↗", url: "/resume.html" },
+          { emoji: "📄", label: "Resume", sub: "One page · view only", cta: "View ↗", url: "/resume.html" },
         ].map((cal, i) => (
           <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "22px 16px" }}>
             <div style={{ fontSize: 22, marginBottom: 8 }}>{cal.emoji}</div>

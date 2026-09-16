@@ -3,7 +3,6 @@ import headshotImg from "./headshot.jpeg";
 
 const MENU_ITEMS = [
   { id: "now-playing", label: "Now Playing", preview: "🎵" },
-  { id: "about", label: "About", preview: "👤" },
   { id: "resume", label: "Resume", preview: "📄" },
   { id: "projects", label: "Projects", preview: "🚀" },
   { id: "content", label: "Content", preview: "✍️" },
@@ -228,39 +227,6 @@ function NowPlayingContent({ theme, isMobile }) {
   );
 }
 
-function AboutContent({ theme, isMobile }) {
-  return (
-    <div>
-      <div style={{ display: "flex", flexDirection: isMobile ? "column" : "row", gap: 24, alignItems: isMobile ? "center" : "flex-start", marginBottom: 32 }}>
-        <div style={{ width: 110, height: 110, borderRadius: 16, overflow: "hidden", border: `2px solid ${theme.pageCardBorder}`, flexShrink: 0, boxShadow: theme.pageCardShadow }}>
-          <Headshot size={110} style={{ borderRadius: 16 }} />
-        </div>
-        <div>
-          <div style={{ fontSize: isMobile ? 24 : 28, fontWeight: 700, color: theme.pageText, letterSpacing: -0.5, marginBottom: 4 }}>John P. Ciannello</div>
-          <div style={{ fontSize: 13, color: theme.pageAccent, fontWeight: 600, marginBottom: 14 }}>Nashville · Founder (AppealIQ / Steadfast) · Full-cycle GTM</div>
-          <div style={{ fontSize: 14, lineHeight: 1.8, color: theme.pageText }}>Builder. Seller. Follower of Christ. I sell and I ship — then I build the system so it keeps running.</div>
-        </div>
-      </div>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10, marginBottom: 28 }}>
-        {[{ n: "$3M+", l: "Pipeline" }, { n: "$600k+", l: "Closed" }, { n: "120%", l: "Quota" }].map((s, i) => (
-          <GlassCard key={i} theme={theme} style={{ textAlign: "center", padding: "18px 12px" }}>
-            <div style={{ fontSize: 20, fontWeight: 800, color: theme.pageAccent, fontFamily: "'SF Mono', monospace" }}>{s.n}</div>
-            <div style={{ fontSize: 10, color: theme.pageSecondary, marginTop: 4, letterSpacing: 0.5, textTransform: "uppercase", fontFamily: "monospace" }}>{s.l}</div>
-          </GlassCard>
-        ))}
-      </div>
-      <div style={{ height: 1, background: theme.pageDivider, marginBottom: 28 }} />
-      <GlassCard theme={theme} style={{ padding: 24 }}>
-        <div style={{ fontSize: 14, lineHeight: 1.9, color: theme.pageText }}>
-          <p>Fractional GTM. Career totals: $3M+ pipeline, $600k+ closed, 120% quota at Fourth.</p>
-          <p style={{ marginTop: 16 }}>Remote from Nashville. Open to a founding AE / early GTM seat (equity + side clients OK) while still building with select firms.</p>
-          <p style={{ marginTop: 16 }}>If you can't tell, I like building things. Give me a problem and I'll find a way to make it work.</p>
-        </div>
-      </GlassCard>
-    </div>
-  );
-}
-
 function ProjectsContent({ theme, isMobile }) {
   return (
     <div>
@@ -291,6 +257,7 @@ function ContentContent({ theme, isMobile }) {
           {[
             { label: "Blog", sub: "jpcblogs.com", url: "https://jpcblogs.com" },
             { label: "Newsletter", sub: "Made to Build", url: "https://made2build.substack.com/" },
+            { label: "X", sub: "@johnciannello", url: "https://x.com/johnciannello" },
             { label: "LinkedIn", sub: "/in/johnciannello", url: "https://www.linkedin.com/in/johnciannello/" },
           ].map((l, i) => (
             <a key={i} href={l.url} target="_blank" rel="noopener noreferrer" style={{ color: theme.pageAccent, textDecoration: "none", fontSize: 13, fontWeight: 500, display: "flex", justifyContent: "space-between", alignItems: "center", padding: "10px 14px", borderRadius: 10, background: theme.pageTag }}>
@@ -358,6 +325,7 @@ function ContactContent({ theme, isMobile }) {
           { icon: "📄", label: "Resume", value: "johnciannello.com/resume", href: "/resume.html" },
           { icon: "🐙", label: "GitHub", value: "/steadfastgrowth", href: "https://github.com/steadfastgrowth" },
           { icon: "📧", label: "Email", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
+          { icon: "𝕏", label: "X", value: "@johnciannello", href: "https://x.com/johnciannello" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },
         ].map((c, i) => (
           <GlassCard key={i} theme={theme} href={c.href} style={{ padding: "16px 20px" }}>
@@ -388,7 +356,7 @@ function ContactContent({ theme, isMobile }) {
   );
 }
 
-const CONTENT_MAP = { "now-playing": NowPlayingContent, about: AboutContent, resume: ResumeContent, projects: ProjectsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
+const CONTENT_MAP = { "now-playing": NowPlayingContent, resume: ResumeContent, projects: ProjectsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
 
 function IPodScreen({ theme, selectedIndex }) {
   return (
@@ -405,7 +373,7 @@ function IPodScreen({ theme, selectedIndex }) {
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", background: theme.menuBg, overflow: "hidden" }}>
           {MENU_ITEMS.map((item, i) => (
-            <div key={item.id} style={{ padding: "0 10px", height: 22, minHeight: 22, maxHeight: 22, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
+            <div key={item.id} style={{ padding: "0 10px", height: 25, minHeight: 25, maxHeight: 25, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
               <span>{item.label}</span>
               <span style={{ fontSize: 9, opacity: 0.6 }}>›</span>
             </div>

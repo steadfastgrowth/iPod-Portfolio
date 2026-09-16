@@ -1,25 +1,59 @@
-let switchEl;
-
-function ensureIosSwitch() {
-  if (typeof document === "undefined") return null;
-  if (switchEl?.isConnected) return switchEl;
-  const el = document.createElement("input");
-  el.type = "checkbox";
-  el.setAttribute("switch", "");
-  el.setAttribute("aria-hidden", "true");
-  el.tabIndex = -1;
-  el.style.cssText = "position:fixed;left:-48px;top:-48px;width:36px;height:22px;margin:0;opacity:0;pointer-events:none;";
-  document.body.appendChild(el);
-  switchEl = el;
-  return el;
+function isIos() {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent || "";
+  if (/iP(hone|ad|od)/.test(ua)) return true;
+  return navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
 }
 
-export function haptic(ms = 10) {
+export function attachIosHaptic(element, { touchAction = "manipulation", mark = "data-haptic-trigger" } = {}) {
+  if (!element || typeof window === "undefined" || !isIos()) return () => {};
+  if (element.querySelector(`[${mark}]`)) return () => {};
+
+  const prevPosition = element.style.position;
+  if (getComputedStyle(element).position === "static") {
+    element.style.position = "relative";
+  }
+
+  const switchEl = document.createElement("input");
+  switchEl.type = "checkbox";
+  switchEl.setAttribute("switch", "");
+  switchEl.setAttribute(mark, "");
+  switchEl.setAttribute("aria-hidden", "true");
+  switchEl.tabIndex = -1;
+  Object.assign(switchEl.style, {
+    position: "absolute",
+    inset: "0",
+    width: "100%",
+    height: "100%",
+    margin: "0",
+    opacity: "0",
+    clipPath: "inset(0 round 999px)",
+    touchAction,
+    zIndex: "1",
+    cursor: "pointer",
+  });
+  switchEl.style.setProperty("-webkit-tap-highlight-color", "transparent");
+  element.appendChild(switchEl);
+
+  return () => {
+    switchEl.remove();
+    if (prevPosition === "") element.style.position = "";
+  };
+}
+
+export function hapticTick(host) {
   try {
-    ensureIosSwitch()?.click();
+    navigator.vibrate?.(5);
   } catch {
     /* ignore */
   }
+  if (!host) return;
+  const sw = host.querySelector("[data-haptic-ring]");
+  if (!sw) return;
+  sw.checked = !sw.checked;
+}
+
+export function haptic(ms = 10) {
   try {
     navigator.vibrate?.(ms);
   } catch {

@@ -96,6 +96,8 @@
     .cols { grid-template-columns: 1fr; gap: 22px; }
     .name { font-size: 24px; }
   }
+  html.embed .bar { display: none; }
+  html.embed .sheet { margin: 12px auto 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
   @media print {
     html, body { background: #fff; }
     .bar { display: none; }
@@ -104,6 +106,7 @@
 </style>
 </head>
 <body>
+<script>if (new URLSearchParams(location.search).has("embed")) document.documentElement.classList.add("embed");</script>
 
   <div class="bar">
     <a class="back" href="/">← johnciannello.com</a>

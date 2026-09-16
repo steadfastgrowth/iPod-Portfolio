@@ -4,6 +4,7 @@ import headshotImg from "./headshot.jpeg";
 const MENU_ITEMS = [
   { id: "now-playing", label: "Now Playing", preview: "🎵" },
   { id: "about", label: "About", preview: "👤" },
+  { id: "resume", label: "Resume", preview: "📄" },
   { id: "projects", label: "Projects", preview: "🚀" },
   { id: "content", label: "Content", preview: "✍️" },
   { id: "experience", label: "Experience", preview: "💼" },
@@ -338,6 +339,14 @@ function ExperienceContent({ theme, isMobile }) {
   );
 }
 
+function ResumeContent() {
+  return (
+    <div style={{ margin: "0 -8px", minHeight: "70vh" }}>
+      <iframe src="/resume.html?embed=1" title="John P. Ciannello resume" style={{ width: "100%", height: "calc(100vh - 110px)", minHeight: 560, border: 0, borderRadius: 8, background: "#d8e0ea" }} />
+    </div>
+  );
+}
+
 function ContactContent({ theme, isMobile }) {
   return (
     <div>
@@ -379,7 +388,7 @@ function ContactContent({ theme, isMobile }) {
   );
 }
 
-const CONTENT_MAP = { "now-playing": NowPlayingContent, about: AboutContent, projects: ProjectsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
+const CONTENT_MAP = { "now-playing": NowPlayingContent, about: AboutContent, resume: ResumeContent, projects: ProjectsContent, content: ContentContent, experience: ExperienceContent, contact: ContactContent };
 
 function IPodScreen({ theme, selectedIndex }) {
   return (
@@ -396,7 +405,7 @@ function IPodScreen({ theme, selectedIndex }) {
       <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
         <div style={{ flex: 1, display: "flex", flexDirection: "column", background: theme.menuBg, overflow: "hidden" }}>
           {MENU_ITEMS.map((item, i) => (
-            <div key={item.id} style={{ padding: "0 10px", height: 25, minHeight: 25, maxHeight: 25, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
+            <div key={item.id} style={{ padding: "0 10px", height: 22, minHeight: 22, maxHeight: 22, fontSize: 11, fontWeight: i === selectedIndex ? 700 : 400, color: i === selectedIndex ? theme.menuHighlightText : theme.menuText, background: i === selectedIndex ? theme.menuHighlight : "transparent", display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: i < MENU_ITEMS.length - 1 ? `0.5px solid ${theme.menuDivider}` : "none", flexShrink: 0, boxSizing: "border-box" }}>
               <span>{item.label}</span>
               <span style={{ fontSize: 9, opacity: 0.6 }}>›</span>
             </div>

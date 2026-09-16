@@ -211,12 +211,15 @@ function NowPlayingContent({ theme, isMobile }) {
         </div>
       </GlassCard>
       <div style={{ display: "flex", gap: 12, width: "100%", flexDirection: isMobile ? "column" : "row" }}>
-        {[{ label: "Free Intro Call", url: "https://calendly.com/john-steadfastgrowth/30min" }].map((cal, i) => (
-          <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "22px 16px", maxWidth: 320, margin: "0 auto" }}>
-            <div style={{ fontSize: 22, marginBottom: 8 }}>📅</div>
+        {[
+          { emoji: "📅", label: "Free Intro Call", sub: "30 min · no pitch, no pressure", cta: "Book Now ↗", url: "https://calendly.com/john-steadfastgrowth/30min" },
+          { emoji: "📄", label: "Resume", sub: "One page · HTML + PDF", cta: "View ↗", url: "/resume.html" },
+        ].map((cal, i) => (
+          <GlassCard key={i} theme={theme} href={cal.url} style={{ flex: 1, textAlign: "center", padding: "22px 16px" }}>
+            <div style={{ fontSize: 22, marginBottom: 8 }}>{cal.emoji}</div>
             <div style={{ fontSize: 14, fontWeight: 700, color: theme.pageText, marginBottom: 3 }}>{cal.label}</div>
-            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 10 }}>30 min · no pitch, no pressure</div>
-            <div style={{ fontSize: 11, color: theme.pageAccent, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>Book Now ↗</div>
+            <div style={{ fontSize: 12, color: theme.pageSecondary, marginBottom: 10 }}>{cal.sub}</div>
+            <div style={{ fontSize: 11, color: theme.pageAccent, fontWeight: 700, letterSpacing: 1, textTransform: "uppercase" }}>{cal.cta}</div>
           </GlassCard>
         ))}
       </div>
@@ -343,6 +346,7 @@ function ContactContent({ theme, isMobile }) {
         {[
           { icon: "🌐", label: "Steadfast Growth", value: "steadfastgrowth.io", href: "https://steadfastgrowth.io" },
           { icon: "🏢", label: "Appeal IQ", value: "appealiq.org", href: "https://appealiq.org" },
+          { icon: "📄", label: "Resume", value: "johnciannello.com/resume", href: "/resume.html" },
           { icon: "🐙", label: "GitHub", value: "/steadfastgrowth", href: "https://github.com/steadfastgrowth" },
           { icon: "📧", label: "Email", value: "john@steadfastgrowth.io", href: "mailto:john@steadfastgrowth.io" },
           { icon: "💼", label: "LinkedIn", value: "/in/johnciannello", href: "https://www.linkedin.com/in/johnciannello/" },

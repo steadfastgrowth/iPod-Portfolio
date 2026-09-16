@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>John P. Ciannello — Resume</title>
+<meta name="description" content="Resume — John P. Ciannello. Founder & Operator · AI Solutions Engineer + Full-Cycle GTM.">
+<style>
+  @page { size: letter; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { background: #d8e0ea; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #1a2333;
+    font-size: 9.85px;
+    line-height: 1.46;
+    background: #d8e0ea;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  .bar {
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 10px 18px;
+    background: rgba(248,248,248,0.94);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    font-size: 13px;
+    color: #1c1c1c;
+  }
+  .bar a.back { font-weight: 600; }
+  .bar a.dl {
+    background: #2a6df4; color: #fff; font-weight: 700; font-size: 12px;
+    padding: 7px 12px; border-radius: 8px; letter-spacing: 0.2px;
+  }
+
+  .sheet {
+    width: 8.5in;
+    max-width: 100%;
+    margin: 22px auto 40px;
+    background: #fff;
+    padding: 0.4in 0.48in 0.36in 0.48in;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.18);
+  }
+
+  .header { display: block; }
+  .header-text { flex: none; }
+  .name { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; line-height: 1; }
+  .name .accent { color: #2a6df4; }
+  .tagline { font-size: 11px; color: #46506a; margin-top: 7px; }
+  .contact { font-size: 9.6px; color: #46506a; margin-top: 8px; }
+  .contact b { color: #1a2333; }
+  .contact .sep { color: #b6bfd4; margin: 0 6px; }
+  .rule { border: none; border-top: 2.5px solid #2a6df4; margin: 14px 0 16px 0; }
+
+  .cols { display: grid; grid-template-columns: 1fr 2.22in; gap: 0.32in; }
+
+  h2 {
+    font-size: 10.2px; font-weight: 800; color: #2a6df4;
+    text-transform: uppercase; margin: 0 0 9px 0; padding-bottom: 4px;
+    border-bottom: 1px solid #e3e9f5; letter-spacing: 0.4px;
+  }
+  .section { margin-bottom: 13px; }
+
+  .summary { font-size: 10.2px; color: #2c3650; margin-bottom: 14px; line-height: 1.5; }
+  .summary b { color: #1a2333; }
+
+  .job { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 3px; gap: 8px; }
+  .job .co { font-weight: 700; font-size: 11px; }
+  .job .role { color: #46506a; font-weight: 400; }
+  .job .dates { color: #8a93ab; font-size: 9px; white-space: nowrap; }
+  .job-detail { color: #2c3650; margin-bottom: 0; }
+  .job-block { border-bottom: 1px dashed #e3e9f5; padding-bottom: 9px; margin-bottom: 9px; }
+  .job-block:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .subrole { display: flex; justify-content: space-between; align-items: baseline; margin: 7px 0 2px 0; gap: 8px; }
+  .subrole .title { font-weight: 700; font-size: 9.8px; color: #1a2333; }
+  .subrole .dates { color: #8a93ab; font-size: 8.8px; white-space: nowrap; }
+
+  .stack { font-size: 8.4px; color: #8a93ab; margin-top: 4px; }
+
+  .quote { font-style: italic; color: #2c3650; border-left: 2.5px solid #d3e0fb; padding-left: 10px; margin-bottom: 10px; }
+  .quote .attr { display: block; font-style: normal; font-weight: 700; margin-top: 3px; font-size: 9.2px; }
+
+  .skill-group { margin-bottom: 10px; }
+  .skill-group h3 { font-size: 8.8px; font-weight: 800; color: #1a2333; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip {
+    font-size: 8.3px; color: #2c3650; background: #f2f5fb;
+    border: 1px solid #e3e9f5; border-radius: 3px; padding: 3px 7px;
+  }
+  .contact-block p { font-size: 9.6px; color: #46506a; margin-bottom: 4px; }
+  .contact-block b { color: #1a2333; }
+  .note { font-size: 7.8px; color: #8a93ab; margin-top: 7px; line-height: 1.4; }
+
+  @media (max-width: 720px) {
+    .sheet { margin: 0; padding: 28px 18px 36px; box-shadow: none; }
+    .cols { grid-template-columns: 1fr; gap: 22px; }
+    .name { font-size: 24px; }
+  }
+  @media print {
+    html, body { background: #fff; }
+    .bar { display: none; }
+    .sheet { margin: 0; box-shadow: none; width: 8.5in; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="bar">
+    <a class="back" href="/">← johnciannello.com</a>
+    <a class="dl" href="/resume.pdf" download="John-Ciannello-Resume.pdf">Download PDF</a>
+  </div>
+
+  <div class="sheet">
+  <div class="header">
+    <div class="header-text">
+      <div class="name">John P. <span class="accent">Ciannello</span></div>
+      <div class="tagline">Founder &amp; Operator · AI Solutions Engineer + Full-Cycle GTM</div>
+      <div class="contact">
+        <b>john@steadfastgrowth.io</b><span class="sep">·</span>732-215-5820<span class="sep">·</span>Nashville, TN<span class="sep">·</span>linkedin.com/in/johnciannello<span class="sep">·</span>steadfastgrowth.io<span class="sep">·</span>appealiq.org
+      </div>
+    </div>
+  </div>
+  <hr class="rule">
+
+  <div class="cols">
+    <div>
+      <p class="summary">
+        Good software now comes from people who can do both jobs — <b>build the product and win the customer.</b>
+        I came up on the revenue side carrying quota as an SDR and then full-cycle AE, and taught myself to design,
+        build, and ship production AI software. I built Steadfast Growth as an independent studio and Appeal IQ as a
+ live CRE tax product. <b>I'm looking for a great opportunity to join an AI-forward team.</b>
+      </p>
+
+      <div class="section">
+        <h2>Experience</h2>
+
+        <div class="job-block">
+          <div class="job">
+            <span class="co">Steadfast Growth <span class="role">— Founder &amp; AI Solutions Engineer</span></span>
+            <span class="dates">2025 – Present</span>
+          </div>
+          <p class="job-detail">
+            Independent studio for AI consulting and GTM consulting: I scope, build, demo, and close every engagement
+            myself. Shipped 6+ client AI systems into production
+            across staffing and B2B GTM. Current site
+            (<a href="https://steadfastgrowth.io"><b>steadfastgrowth.io</b></a>) is geared toward local AI implementation —
+            advise, implement, hand off. <b>Over $38k closed and delivered across Steadfast Growth and Appeal IQ.</b>
+          </p>
+        </div>
+
+        <div class="job-block">
+          <div class="job">
+            <span class="co">Appeal IQ <span class="role">— Founder · <a href="https://appealiq.org">appealiq.org</a></span></span>
+            <span class="dates">2026 – Present</span>
+          </div>
+          <p class="job-detail">
+            Local-first AI for property tax research. The value is time, which turns into revenue: it gets the data
+            aggregation step done faster so the firm spends less time pulling data and more time analyzing it.
+            I sold it, built it, and installed it — including a dedicated local setup for a paying firm.
+          </p>
+          <div class="stack">appealiq.org</div>
+        </div>
+
+        <div class="job-block">
+          <div class="job">
+            <span class="co">Discover Praxis</span>
+            <span class="dates">May 2024 – Aug 2026</span>
+          </div>
+          <div class="subrole">
+            <span class="title">Business Development Manager / Full-Cycle AE</span>
+            <span class="dates">May 2025 – Aug 2026</span>
+          </div>
+          <p class="job-detail">
+            Promoted to build the hiring-partner network from zero: 36 partner deals and $175K+ in placement value
+            in under 6 months. Ran demos and managed a BDR intern.
+          </p>
+          <div class="subrole">
+            <span class="title">Admissions Lead</span>
+            <span class="dates">May 2024 – Apr 2025</span>
+          </div>
+          <p class="job-detail">
+            Generated $2.4M in pipeline and closed $420K+ in 12 months. 20+ screening calls a month; self-sourced
+            60 organic leads at a single conference.
+          </p>
+        </div>
+
+        <div class="job-block">
+          <div class="job">
+            <span class="co">Fourth / HotSchedules <span class="role">— Sales Development Rep</span></span>
+            <span class="dates">Nov 2023 – May 2024</span>
+          </div>
+          <p class="job-detail">
+            Set the team records for meetings booked in a day (6) and in a week (11). 120% average quota (246%
+            including ramp), $600K+ in sourced pipeline; authored outbound cadences adopted by the entire
+            mid-market segment.
+          </p>
+        </div>
+
+        <div class="job-block">
+          <div class="job">
+            <span class="co">Power Locker <span class="role">— Operations Manager</span></span>
+            <span class="dates">Nov 2021 – Jun 2023</span>
+          </div>
+          <p class="job-detail">
+            Generated $150K+ across sales revenue and investment revenue in an ops role (not a quota seat).
+            Ran a 30+ unit vending fleet — including a remotely managed high-end fleet in Canada — landed new
+            machine locations, managed affiliate payouts, and implemented an international banking solution.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>In Their Words</h2>
+        <p class="quote">
+          “A natural born closer... a ‘blank check’ kind of talent.”
+          <span class="attr">Mitchell Earl — Business Owner · prev. CEO @ Praxis</span>
+        </p>
+        <p class="quote">
+          “A Swiss Army knife — great at top of funnel, closing, and AI. Moves fast, and genuinely cares about
+          driving results.”
+          <span class="attr">Jed Mahrle — Founder @ Practical Prospecting</span>
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="section">
+        <h2>Contact</h2>
+        <div class="contact-block">
+          <p><b>john@steadfastgrowth.io</b></p>
+          <p>732-215-5820</p>
+          <p>Nashville, TN</p>
+          <p>linkedin.com/in/johnciannello</p>
+          <p>steadfastgrowth.io <span style="color:#8a93ab">(local AI)</span></p>
+          <p>live product: <b>appealiq.org</b></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Build &amp; ship*</h2>
+        <div class="chips">
+          <span class="chip">Next.js / React</span>
+          <span class="chip">TypeScript</span>
+          <span class="chip">Python</span>
+          <span class="chip">Node / Express</span>
+          <span class="chip">Supabase / Postgres</span>
+          <span class="chip">Stripe</span>
+          <span class="chip">Vercel</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Applied AI</h2>
+        <div class="chips">
+          <span class="chip">Local AI</span>
+          <span class="chip">Grok / xAI</span>
+          <span class="chip">n8n</span>
+          <span class="chip">LLM agents</span>
+          <span class="chip">Grokbot</span>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Go-to-market</h2>
+        <div class="chips">
+          <span class="chip">Full-cycle sales</span>
+          <span class="chip">Outbound design</span>
+          <span class="chip">Pricing</span>
+          <span class="chip">Demos / POCs</span>
+          <span class="chip">HubSpot</span>
+          <span class="chip">LeadMagic</span>
+          <span class="chip">Clay</span>
+          <span class="chip">Smartlead</span>
+        </div>
+      </div>
+      <p class="note">*Not fluent in every item — I use AI to implement and ship with these tools.</p>
+    </div>
+  </div>
+  </div>
+
+</body>
+</html>

@@ -13,6 +13,7 @@ const MENU_ITEMS = [
 const PROJECTS = [
   { name: "Appeal IQ", role: "Founder", description: "Local-first property-tax appeal OS for advisory firms. County research, scoring, briefs. Sold inside consulting, not public download.", status: "Live", url: "https://appealiq.org" },
   { name: "Steadfast Growth", role: "Founder", description: "Private office AI; Steadfast Local = one machine, imaged/wired, you own it.", status: "Active", url: "https://steadfastgrowth.io" },
+  { name: "Open Tool Cafe", role: "Builder", description: "Share and download open source tools. Connect with other founders and builders. Enjoy some java.", status: "Live", url: "https://opentool.cafe" },
   { name: "Fractional GTM", role: "Operator", description: "Full-cycle outbound + close, Clay-native.", status: "Recent" },
   { name: "Custom AI Builds", role: "Builder", description: "Lead gen, automation, dashboards when the problem is real and repeatable.", status: "Ongoing" },
 ];

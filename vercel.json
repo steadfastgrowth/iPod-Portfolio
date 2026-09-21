@@ -3,6 +3,11 @@
     { "source": "/resume.pdf", "destination": "/resume", "permanent": true }
   ],
   "rewrites": [
-    { "source": "/resume", "destination": "/resume.html" }
+    { "source": "/now-playing", "destination": "/index.html" },
+    { "source": "/resume", "destination": "/index.html" },
+    { "source": "/projects", "destination": "/index.html" },
+    { "source": "/content", "destination": "/index.html" },
+    { "source": "/experience", "destination": "/index.html" },
+    { "source": "/contact", "destination": "/index.html" }
   ]
 }

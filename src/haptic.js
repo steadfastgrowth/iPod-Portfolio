@@ -62,7 +62,7 @@ export function attachTapHaptic(mount) {
   return () => clip.remove();
 }
 
-export function attachWheelHaptic(mount, onMove) {
+export function attachWheelHaptic(mount) {
   if (!mount || typeof document === "undefined" || !isIos()) return () => {};
 
   const clip = document.createElement("div");
@@ -79,8 +79,7 @@ export function attachWheelHaptic(mount, onMove) {
   let x = 0;
   let y = 0;
   let flipped = false;
-  let vibrate = false;
-  let pending = false;
+  let extraFlips = 0;
   let pointerId = null;
 
   const layoutIdle = () => {
@@ -96,15 +95,17 @@ export function attachWheelHaptic(mount, onMove) {
     ].join(";");
   };
 
-  const layoutDrag = () => {
-    const scale = 0.4;
-    const height = 31 * scale;
-    const width = 70 * scale;
-    const top = (vibrate ? startY : y) - height / 2;
-    const left = (vibrate ? startX : x) - width / 2;
+  const layoutDrag = (underFinger) => {
+    const height = 31 * 0.55;
+    const width = 70 * 0.55;
+    const anchorX = underFinger ? x : startX;
+    const anchorY = underFinger ? y : startY;
+    const top = anchorY - height / 2;
+    const left = anchorX - width / 2;
     const angle = Math.atan2(y - startY, x - startX) * (180 / Math.PI);
     const angle360 = ((angle % 360) + 360) % 360;
-
+    // Park the thumb on the finger and flip direction so the knob crosses it.
+    // Offset the control when we are not ticking, or every move would buzz.
     clip.style.cssText = [
       "all: unset",
       "position: absolute",
@@ -115,10 +116,11 @@ export function attachWheelHaptic(mount, onMove) {
       "left: 0",
       "opacity: 0",
       "pointer-events: auto",
-      `direction: ${!vibrate || flipped ? "rtl" : "ltr"}`,
-      `transform: translate(${left}px, ${top}px) rotate(${angle360}deg) translateX(${vibrate ? 0 : 50}px)`,
+      `direction: ${flipped ? "rtl" : "ltr"}`,
+      `transform: translate(${left}px, ${top}px) rotate(${angle360}deg) translateX(${underFinger ? 0 : 46}px)`,
       "-webkit-tap-highlight-color: transparent",
     ].join(";");
+    if (underFinger) clip.getBoundingClientRect();
   };
 
   const point = (event) => {
@@ -130,8 +132,7 @@ export function attachWheelHaptic(mount, onMove) {
     if (!tracking) return;
     tracking = false;
     pointerId = null;
-    vibrate = false;
-    pending = false;
+    extraFlips = 0;
     input.checked = false;
     layoutIdle();
     requestAnimationFrame(() => {
@@ -147,8 +148,7 @@ export function attachWheelHaptic(mount, onMove) {
     x = startX;
     y = startY;
     tracking = true;
-    vibrate = false;
-    pending = false;
+    extraFlips = 0;
     layoutIdle();
     try {
       input.setPointerCapture(event.pointerId);
@@ -160,17 +160,20 @@ export function attachWheelHaptic(mount, onMove) {
   const onPointerMove = (event) => {
     if (!tracking || event.pointerId !== pointerId) return;
     [x, y] = point(event);
-    // Runs in the capture phase, before Safari acts on the switch, so a detent
-    // can slide the thumb under the finger on this same move.
-    onMove?.(event.clientX, event.clientY);
-    if (pending) {
-      pending = false;
+    if (extraFlips > 0) {
+      extraFlips -= 1;
       flipped = !flipped;
-      vibrate = true;
+      layoutDrag(true);
     } else {
-      vibrate = false;
+      layoutDrag(false);
     }
-    layoutDrag();
+  };
+
+  const onTouchMove = (event) => {
+    if (!tracking) return;
+    const touch = event.touches[0];
+    if (!touch) return;
+    [x, y] = point(touch);
   };
 
   const onPointerUp = (event) => {
@@ -180,6 +183,7 @@ export function attachWheelHaptic(mount, onMove) {
 
   layoutIdle();
   input.addEventListener("pointerdown", onPointerDown, true);
+  input.addEventListener("touchmove", onTouchMove, { capture: true, passive: true });
   window.addEventListener("pointermove", onPointerMove, true);
   window.addEventListener("pointerup", onPointerUp, true);
   window.addEventListener("pointercancel", onPointerUp, true);
@@ -190,10 +194,13 @@ export function attachWheelHaptic(mount, onMove) {
     },
     armTick() {
       if (!tracking) return;
-      pending = true;
+      flipped = !flipped;
+      extraFlips = 1;
+      layoutDrag(true);
     },
     destroy() {
       input.removeEventListener("pointerdown", onPointerDown, true);
+      input.removeEventListener("touchmove", onTouchMove, true);
       window.removeEventListener("pointermove", onPointerMove, true);
       window.removeEventListener("pointerup", onPointerUp, true);
       window.removeEventListener("pointercancel", onPointerUp, true);

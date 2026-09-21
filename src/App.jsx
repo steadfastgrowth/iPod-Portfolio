@@ -1,6 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from "react";
 import headshotImg from "./headshot.jpeg";
-import { haptic, attachIosHaptic, hapticTick } from "./haptic";
+import { haptic, attachWheelHaptic, attachTapHaptic, hapticTick, wheelGestureActive } from "./haptic";
 
 const MENU_ITEMS = [
   { id: "now-playing", label: "Now Playing", preview: "🎵" },
@@ -396,14 +396,17 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(false);
   const wheelRef = useRef(null);
   const centerRef = useRef(null);
+  const wheelHapticRef = useRef(null);
+  const centerHapticRef = useRef(null);
   const lastAngleRef = useRef(null);
   const accumulatorRef = useRef(0);
   const isTrackingRef = useRef(false);
   const theme = themes[mode];
 
   useEffect(() => { const c = () => setIsMobile(window.innerWidth < 640); c(); window.addEventListener("resize", c); return () => window.removeEventListener("resize", c); }, []);
-  useEffect(() => attachIosHaptic(wheelRef.current, { touchAction: "none", mark: "data-haptic-ring" }), []);
-  useEffect(() => attachIosHaptic(centerRef.current, { mark: "data-haptic-center" }), []);
+  const wheelMoveRef = useRef(() => {});
+  useEffect(() => attachWheelHaptic(wheelHapticRef.current, (x, y) => wheelMoveRef.current(x, y)), []);
+  useEffect(() => attachTapHaptic(centerHapticRef.current), []);
 
   const getAngle = useCallback((x, y) => { if (!wheelRef.current) return 0; const r = wheelRef.current.getBoundingClientRect(); return Math.atan2(y - (r.top + r.height / 2), x - (r.left + r.width / 2)) * (180 / Math.PI); }, []);
   const handleWheelStart = useCallback((x, y) => { if (openSection || zoomPhase !== "idle") return; lastAngleRef.current = getAngle(x, y); accumulatorRef.current = 0; isTrackingRef.current = true; }, [getAngle, openSection, zoomPhase]);
@@ -412,12 +415,13 @@ export default function App() {
     const a = getAngle(x, y); let d = a - lastAngleRef.current;
     if (d > 180) d -= 360; if (d < -180) d += 360;
     accumulatorRef.current += d; lastAngleRef.current = a;
-    if (accumulatorRef.current > 28) { setSelectedIndex(p => Math.min(p + 1, MENU_ITEMS.length - 1)); accumulatorRef.current = 0; hapticTick(wheelRef.current); }
-    else if (accumulatorRef.current < -28) { setSelectedIndex(p => Math.max(p - 1, 0)); accumulatorRef.current = 0; hapticTick(wheelRef.current); }
+    if (accumulatorRef.current > 28) { setSelectedIndex(p => Math.min(p + 1, MENU_ITEMS.length - 1)); accumulatorRef.current = 0; hapticTick(); }
+    else if (accumulatorRef.current < -28) { setSelectedIndex(p => Math.max(p - 1, 0)); accumulatorRef.current = 0; hapticTick(); }
   }, [getAngle, openSection, zoomPhase]);
+  wheelMoveRef.current = handleWheelMove;
   const handleWheelEnd = useCallback(() => { isTrackingRef.current = false; lastAngleRef.current = null; }, []);
 
-  useEffect(() => { const up = () => handleWheelEnd(); const mv = (e) => handleWheelMove(e.clientX, e.clientY); window.addEventListener("mouseup", up); window.addEventListener("mousemove", mv); return () => { window.removeEventListener("mouseup", up); window.removeEventListener("mousemove", mv); }; }, [handleWheelEnd, handleWheelMove]);
+  useEffect(() => { const up = () => handleWheelEnd(); const mv = (e) => { if (wheelGestureActive()) return; handleWheelMove(e.clientX, e.clientY); }; window.addEventListener("mouseup", up); window.addEventListener("mousemove", mv); return () => { window.removeEventListener("mouseup", up); window.removeEventListener("mousemove", mv); }; }, [handleWheelEnd, handleWheelMove]);
 
   const handleSelect = () => { if (openSection || zoomPhase !== "idle") return; setOpenSection(MENU_ITEMS[selectedIndex].id); haptic(15); setZoomPhase("zooming"); setTimeout(() => setZoomPhase("open"), 400); };
   const handleBack = () => { haptic(10); setZoomPhase("closing"); setTimeout(() => { setZoomPhase("idle"); setOpenSection(null); }, 350); };
@@ -466,16 +470,19 @@ export default function App() {
           <div ref={wheelRef} style={{ width: isMobile ? Math.min(185, ipodW * 0.63) : 205, height: isMobile ? Math.min(185, ipodW * 0.63) : 205, borderRadius: "50%", background: theme.wheelBg, display: "flex", alignItems: "center", justifyContent: "center", position: "relative", cursor: "pointer", boxShadow: theme.wheelShadow, userSelect: "none", WebkitUserSelect: "none", touchAction: "none" }}
             onMouseDown={e => handleWheelStart(e.clientX, e.clientY)}
             onTouchStart={e => { const t = e.touches[0]; handleWheelStart(t.clientX, t.clientY); }}
-            onTouchMove={e => { e.preventDefault(); const t = e.touches[0]; handleWheelMove(t.clientX, t.clientY); }}
+            onTouchMove={e => { if (wheelGestureActive()) return; const t = e.touches[0]; handleWheelMove(t.clientX, t.clientY); }}
             onTouchEnd={() => handleWheelEnd()}>
-            <span style={{ position: "absolute", top: 14, fontSize: 9, fontWeight: 600, color: theme.wheelText, letterSpacing: 1.5 }}>MENU</span>
-            <span style={{ position: "absolute", bottom: 14, fontSize: 8, color: theme.wheelText, letterSpacing: 1 }}>▶︎❙❙</span>
-            <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText }}>◂◂</span>
-            <span style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText }}>▸▸</span>
+            <span style={{ position: "absolute", top: 14, fontSize: 9, fontWeight: 600, color: theme.wheelText, letterSpacing: 1.5, pointerEvents: "none" }}>MENU</span>
+            <span style={{ position: "absolute", bottom: 14, fontSize: 8, color: theme.wheelText, letterSpacing: 1, pointerEvents: "none" }}>▶︎❙❙</span>
+            <span style={{ position: "absolute", left: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText, pointerEvents: "none" }}>◂◂</span>
+            <span style={{ position: "absolute", right: 16, top: "50%", transform: "translateY(-50%)", fontSize: 8, color: theme.wheelText, pointerEvents: "none" }}>▸▸</span>
+            <div ref={wheelHapticRef} style={{ position: "absolute", inset: 0, zIndex: 1, pointerEvents: "none" }} />
             <div ref={centerRef} onClick={e => { e.stopPropagation(); handleSelect(); }}
-              style={{ width: isMobile ? Math.min(66, ipodW * 0.22) : 74, height: isMobile ? Math.min(66, ipodW * 0.22) : 74, borderRadius: "50%", background: theme.wheelCenter, boxShadow: theme.wheelCenterShadow, zIndex: 2, cursor: "pointer", transition: "transform 0.1s", position: "relative" }}
+              style={{ width: isMobile ? Math.min(66, ipodW * 0.22) : 74, height: isMobile ? Math.min(66, ipodW * 0.22) : 74, borderRadius: "50%", background: theme.wheelCenter, boxShadow: theme.wheelCenterShadow, zIndex: 2, cursor: "pointer", transition: "transform 0.1s", position: "relative", overflow: "hidden" }}
               onMouseEnter={e => e.currentTarget.style.transform = "scale(0.96)"}
-              onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"} />
+              onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}>
+              <div ref={centerHapticRef} style={{ position: "absolute", inset: 0 }} />
+            </div>
           </div>
         </div>
         <div style={{ marginTop: 18, fontSize: 10, fontFamily: "monospace", color: mode === "light" ? "#888" : "#666", letterSpacing: 1.5, opacity: 0.5, textAlign: "center" }}>
